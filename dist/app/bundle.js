@@ -69,6 +69,8 @@
 	
 	var _register = __webpack_require__(/*! ./components/register */ 240);
 	
+	var _Search = __webpack_require__(/*! ./components/Search */ 241);
+	
 	var _main = __webpack_require__(/*! ./components/main */ 226);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -100,7 +102,8 @@
 	                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _Home.Home }),
 	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/home", component: _Home.Home }),
 	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/login", component: _login.login }),
-	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/register", component: _register.register })
+	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/register", component: _register.register }),
+	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/search", component: _Search.Search })
 	                )
 	            );
 	        }
@@ -26497,6 +26500,8 @@
 	
 	var _MenuLinks2 = _interopRequireDefault(_MenuLinks);
 	
+	var _reactRouterDom = __webpack_require__(/*! react-router-dom */ 211);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26515,6 +26520,11 @@
 	    }
 	
 	    _createClass(Header, [{
+	        key: "onNavSignIn",
+	        value: function onNavSignIn() {
+	            this.props.history.push("/login");
+	        }
+	    }, {
 	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -26526,32 +26536,22 @@
 	                    _react2.default.createElement(
 	                        "div",
 	                        { className: "fl-lt", style: { padding: '10px', top: 0 } },
-	                        _react2.default.createElement(_MenuLinks2.default, { items: "hi" }),
-	                        _react2.default.createElement(
-	                            "div",
-	                            { id: "mySidenav", className: "sidenav" },
-	                            _react2.default.createElement(
-	                                "ul",
-	                                null,
-	                                _react2.default.createElement(
-	                                    "div",
-	                                    null,
-	                                    _react2.default.createElement(
-	                                        "a",
-	                                        null,
-	                                        "Hi there guest. This menu has more items but you must be logged in to access them."
-	                                    )
-	                                )
-	                            )
-	                        )
+	                        _react2.default.createElement(_MenuLinks2.default, null)
 	                    ),
 	                    _react2.default.createElement(
 	                        "div",
 	                        { className: "fl-rt ", style: { padding: '10px', top: 0 } },
-	                        _react2.default.createElement("a", { className: "submittt", type: "button", href: "#" })
+	                        _react2.default.createElement(
+	                            "button",
+	                            { className: "submittt", type: "button", onClick: this.onNavSignIn.bind(this), style: { border: 'none', boxShadow: 'none' } },
+	                            "Sign In"
+	                        )
 	                    ),
-	                    _react2.default.createElement("div", { className: "text--center center-x",
-	                        style: { top: '0px', fontSize: '2em', paddingTop: '30px', position: 'absolute' } })
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "text--center center-x", style: { top: '0px', fontSize: '2em', paddingTop: '30px', position: 'absolute' } },
+	                        "Hey, User"
+	                    )
 	                ),
 	                _react2.default.createElement(
 	                    "div",
@@ -26564,6 +26564,8 @@
 	
 	    return Header;
 	}(_react2.default.Component);
+	
+	exports.default = (0, _reactRouterDom.withRouter)(Header);
 
 /***/ }),
 /* 228 */
@@ -26750,6 +26752,8 @@
 	
 	__webpack_require__(/*! ./menu.scss */ 230);
 	
+	var _reactRouter = __webpack_require__(/*! react-router */ 184);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26784,56 +26788,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        "div",
-	                        { className: "content" },
-	                        _react2.default.createElement(
-	                            "h2",
-	                            null,
-	                            "CONTENT"
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        "div",
 	                        { className: "navbar" },
-	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "navbar-logo" },
-	                            _react2.default.createElement(
-	                                "h2",
-	                                null,
-	                                "YOUR LOGO"
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            "ul",
-	                            { className: "navbar-social" },
-	                            _react2.default.createElement(
-	                                "li",
-	                                null,
-	                                _react2.default.createElement(
-	                                    "a",
-	                                    { href: "#" },
-	                                    "hi"
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                "li",
-	                                null,
-	                                _react2.default.createElement(
-	                                    "a",
-	                                    { href: "#" },
-	                                    "hi"
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                "li",
-	                                null,
-	                                _react2.default.createElement(
-	                                    "a",
-	                                    { href: "#" },
-	                                    "hi"
-	                                )
-	                            )
-	                        ),
 	                        _react2.default.createElement(
 	                            "ul",
 	                            { className: "navbar-menu" },
@@ -26852,7 +26807,7 @@
 	                                _react2.default.createElement(
 	                                    "a",
 	                                    { href: "#" },
-	                                    "Store"
+	                                    "Your Account"
 	                                )
 	                            ),
 	                            _react2.default.createElement(
@@ -26861,7 +26816,16 @@
 	                                _react2.default.createElement(
 	                                    "a",
 	                                    { href: "#" },
-	                                    "About"
+	                                    "Previous Downloads"
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                "li",
+	                                null,
+	                                _react2.default.createElement(
+	                                    "a",
+	                                    { href: "#" },
+	                                    "All Books"
 	                                )
 	                            )
 	                        )
@@ -26941,7 +26905,7 @@
 	
 	
 	// module
-	exports.push([module.id, "html {\n  font-size: 10px; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  color: #22313a;\n  background-color: #ffffff;\n  font-family: 'Helvetica Neue', sans-serif; }\n\na {\n  text-decoration: none; }\n\nul {\n  list-style: none; }\n\n/* Sidebar Styles */\n.page-wrap {\n  display: block;\n  position: relative;\n  width: 100%; }\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: calc(98% - 6vh);\n    display: block;\n    height: 7vh;\n    width: 7vh;\n    line-height: 7vh;\n    margin-top: 0.5vh;\n    background-color: #03A9F4;\n    color: #ffffff;\n    text-align: center;\n    font-size: 7vh;\n    z-index: 10;\n    cursor: pointer;\n    webkit-transition: all 0.3s ease-in-out;\n    -moz-transition: all 0.3s ease-in-out;\n    -o-transition: all 0.3s ease-in-out;\n    transition: all 0.3s ease-in-out; }\n\n.content {\n  position: relative;\n  width: 100%;\n  margin-top: 15vh;\n  text-align: center;\n  font-size: 1.5rem;\n  webkit-transition: all 0.3s ease-in-out;\n  -moz-transition: all 0.3s ease-in-out;\n  -o-transition: all 0.3s ease-in-out;\n  transition: all 0.3s ease-in-out; }\n\n.navbar {\n  display: flex;\n  justify-content: space-around;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  height: 8vh;\n  width: 100%;\n  background-color: #22313a;\n  color: #ffffff;\n  text-align: center;\n  z-index: 10;\n  webkit-transition: all 0.3s ease-in-out;\n  -moz-transition: all 0.3s ease-in-out;\n  -o-transition: all 0.3s ease-in-out;\n  transition: all 0.3s ease-in-out; }\n  .navbar .navbar-logo, .navbar ul.navbar-social {\n    position: absolute;\n    top: 0;\n    height: 8vh;\n    line-height: 8vh; }\n  .navbar .navbar-logo {\n    left: 2%; }\n    .navbar .navbar-logo h2 {\n      display: inline; }\n  .navbar ul.navbar-social {\n    display: flex;\n    justify-content: space-between;\n    width: 30%;\n    margin: 0;\n    padding: 0;\n    background-color: #22313a;\n    z-index: 100; }\n    .navbar ul.navbar-social li {\n      margin-top: 1vh;\n      float: left; }\n      .navbar ul.navbar-social li a {\n        color: #ffffff;\n        text-decoration: none; }\n        .navbar ul.navbar-social li a:hover i {\n          color: #03A9F4; }\n        .navbar ul.navbar-social li a i {\n          font-size: 2rem;\n          webkit-transition: all 0.3s ease-in-out;\n          -moz-transition: all 0.3s ease-in-out;\n          -o-transition: all 0.3s ease-in-out;\n          transition: all 0.3s ease-in-out; }\n  .navbar ul.navbar-menu {\n    position: absolute;\n    bottom: 1vh;\n    width: 30%;\n    margin: 0;\n    text-transform: uppercase;\n    font-size: 1.5rem; }\n    .navbar ul.navbar-menu li {\n      margin: 1rem 0; }\n      .navbar ul.navbar-menu li:last-child {\n        margin-bottom: 0; }\n      .navbar ul.navbar-menu li a {\n        color: #ffffff;\n        webkit-transition: all 0.3s ease-in-out;\n        -moz-transition: all 0.3s ease-in-out;\n        -o-transition: all 0.3s ease-in-out;\n        transition: all 0.3s ease-in-out; }\n        .navbar ul.navbar-menu li a:hover {\n          color: #03A9F4; }\n\n#navbar-toggle {\n  display: none; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 24vh; }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(16vh); }\n\n@media (min-width: 400px) {\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: 85%;\n    height: 11vh;\n    line-height: 11vh;\n    width: 11vh;\n    margin-top: 0.5vh;\n    z-index: 100; }\n  .navbar {\n    height: 12vh; }\n    .navbar .navbar-logo, .navbar .navbar-social {\n      height: 12vh;\n      line-height: 12vh; }\n    .navbar .navbar-logo {\n      height: 3vh; }\n      .navbar .navbar-logo h2 {\n        font-size: 2rem; }\n    .navbar ul.navbar-social {\n      height: 12vh; }\n      .navbar ul.navbar-social li {\n        margin-top: 3vh; }\n        .navbar ul.navbar-social li a i {\n          font-size: 2.5rem; }\n    .navbar ul.navbar-menu {\n      bottom: 3vh;\n      width: 30%;\n      font-size: 1.8rem; }\n      .navbar ul.navbar-menu li {\n        margin: 2rem 0; }\n        .navbar ul.navbar-menu li a {\n          color: #ffffff; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 48vh; }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(36vh); } }\n\n@media (min-width: 1000px) {\n  .content {\n    width: 75%;\n    margin-left: 25%;\n    margin-top: 0; }\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: 25%;\n    height: 45px;\n    width: 45px;\n    line-height: 40px;\n    margin-top: 0;\n    font-size: 35px; }\n  .navbar {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 100vh;\n    width: 25%; }\n    .navbar .navbar-logo {\n      top: 10%;\n      height: 20%;\n      width: 100%;\n      left: 0; }\n      .navbar .navbar-logo h2 {\n        font-size: 2rem; }\n    .navbar ul.navbar-social {\n      top: 20%;\n      height: 10%;\n      z-index: 0;\n      font-size: 1.5rem; }\n      .navbar ul.navbar-social li {\n        height: 1.5rem;\n        width: 1.5rem; }\n        .navbar ul.navbar-social li a {\n          color: #ffffff;\n          text-decoration: none; }\n          .navbar ul.navbar-social li a i {\n            font-size: 3rem; }\n    .navbar ul.navbar-menu {\n      position: absolute;\n      top: 40%;\n      width: 100%;\n      margin: 0;\n      padding: 0;\n      font-size: 1.6rem; }\n      .navbar ul.navbar-menu li {\n        margin: 2rem 0; }\n        .navbar ul.navbar-menu li:last-child {\n          margin-bottom: 0; }\n        .navbar ul.navbar-menu li a {\n          color: #ffffff; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 100vh;\n    transform: translateX(-100%); }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(0);\n    left: 0px; }\n  #navbar-toggle:checked + .page-wrap .content {\n    width: 100%;\n    margin-left: 0; }\n  ul.navbar-menu li {\n    color: #ffffff; } }\n", ""]);
+	exports.push([module.id, "html {\n  font-size: 10px; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  color: #22313a;\n  background-color: #ffffff;\n  font-family: 'Helvetica Neue', sans-serif; }\n\na {\n  text-decoration: none; }\n\nul {\n  list-style: none; }\n\n/* Sidebar Styles */\n.page-wrap {\n  display: block;\n  position: relative;\n  width: 100%; }\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: calc(98% - 6vh);\n    display: block;\n    height: 7vh;\n    width: 7vh;\n    line-height: 7vh;\n    margin-top: 0.5vh;\n    background-color: #d95887;\n    color: #ffffff;\n    text-align: center;\n    font-size: 7vh;\n    z-index: 10;\n    cursor: pointer;\n    webkit-transition: all 0.3s ease-in-out;\n    -moz-transition: all 0.3s ease-in-out;\n    -o-transition: all 0.3s ease-in-out;\n    transition: all 0.3s ease-in-out; }\n\n.content {\n  position: relative;\n  width: 100%;\n  margin-top: 15vh;\n  text-align: center;\n  font-size: 1.5rem;\n  webkit-transition: all 0.3s ease-in-out;\n  -moz-transition: all 0.3s ease-in-out;\n  -o-transition: all 0.3s ease-in-out;\n  transition: all 0.3s ease-in-out; }\n\n.navbar {\n  display: flex;\n  justify-content: space-around;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  height: 8vh;\n  left: -100%;\n  width: 100%;\n  transform: translateX(-100%);\n  background-color: #252a2d;\n  color: #ffffff;\n  text-align: center;\n  z-index: 10;\n  webkit-transition: all 0.3s ease-in-out;\n  -moz-transition: all 0.3s ease-in-out;\n  -o-transition: all 0.3s ease-in-out;\n  transition: all 0.3s ease-in-out; }\n  .navbar .navbar-logo, .navbar ul.navbar-social {\n    position: absolute;\n    top: 0;\n    height: 8vh;\n    line-height: 8vh; }\n  .navbar .navbar-logo {\n    left: 2%; }\n    .navbar .navbar-logo h2 {\n      display: inline; }\n  .navbar ul.navbar-social {\n    display: flex;\n    justify-content: space-between;\n    width: 30%;\n    margin: 0;\n    padding: 0;\n    background-color: #252a2d;\n    z-index: 100; }\n    .navbar ul.navbar-social li {\n      margin-top: 1vh;\n      float: left; }\n      .navbar ul.navbar-social li a {\n        color: #ffffff;\n        text-decoration: none; }\n        .navbar ul.navbar-social li a:hover i {\n          color: #d95887; }\n        .navbar ul.navbar-social li a i {\n          font-size: 2rem;\n          webkit-transition: all 0.3s ease-in-out;\n          -moz-transition: all 0.3s ease-in-out;\n          -o-transition: all 0.3s ease-in-out;\n          transition: all 0.3s ease-in-out; }\n  .navbar ul.navbar-menu {\n    position: absolute;\n    bottom: 1vh;\n    width: 30%;\n    margin: 0;\n    text-transform: uppercase;\n    font-size: 1.5rem; }\n    .navbar ul.navbar-menu li {\n      margin: 1rem 0; }\n      .navbar ul.navbar-menu li:last-child {\n        margin-bottom: 0; }\n      .navbar ul.navbar-menu li a {\n        color: #ffffff;\n        webkit-transition: all 0.3s ease-in-out;\n        -moz-transition: all 0.3s ease-in-out;\n        -o-transition: all 0.3s ease-in-out;\n        transition: all 0.3s ease-in-out; }\n        .navbar ul.navbar-menu li a:hover {\n          color: #d95887; }\n\n#navbar-toggle {\n  display: none; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 24vh; }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(16vh); }\n\n@media (max-width: 700px) {\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 7vh;\n    line-height: 7vh;\n    width: 7vh;\n    margin-top: 0.5vh;\n    z-index: 100; }\n  .navbar {\n    height: 12vh; }\n    .navbar .navbar-logo, .navbar .navbar-social {\n      height: 12vh;\n      line-height: 12vh; }\n    .navbar .navbar-logo {\n      height: 3vh; }\n      .navbar .navbar-logo h2 {\n        font-size: 2rem; }\n    .navbar ul.navbar-social {\n      height: 12vh; }\n      .navbar ul.navbar-social li {\n        margin-top: 3vh; }\n        .navbar ul.navbar-social li a i {\n          font-size: 2.5rem; }\n    .navbar ul.navbar-menu {\n      bottom: 3vh;\n      width: 30%;\n      font-size: 1.8rem; }\n      .navbar ul.navbar-menu li {\n        margin: 2rem 0; }\n        .navbar ul.navbar-menu li a {\n          color: #ffffff; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 48vh;\n    left: 100%; }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(36vh); } }\n\n@media (min-width: 700px) {\n  .content {\n    width: 75%;\n    margin-left: 25%;\n    margin-top: 0; }\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 45px;\n    width: 45px;\n    line-height: 40px;\n    margin-top: 0;\n    font-size: 35px; }\n  .navbar {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 100vh;\n    width: 25%; }\n    .navbar .navbar-logo {\n      top: 10%;\n      height: 20%;\n      width: 100%;\n      left: 0; }\n      .navbar .navbar-logo h2 {\n        font-size: 2rem; }\n    .navbar ul.navbar-social {\n      top: 20%;\n      height: 10%;\n      z-index: 0;\n      font-size: 1.5rem; }\n      .navbar ul.navbar-social li {\n        height: 1.5rem;\n        width: 1.5rem; }\n        .navbar ul.navbar-social li a {\n          color: #ffffff;\n          text-decoration: none; }\n          .navbar ul.navbar-social li a i {\n            font-size: 3rem; }\n    .navbar ul.navbar-menu {\n      position: absolute;\n      top: 0;\n      width: 100%;\n      margin: 0;\n      padding: 0;\n      font-size: 1.6rem; }\n      .navbar ul.navbar-menu li {\n        margin: 2rem 0; }\n        .navbar ul.navbar-menu li:last-child {\n          margin-bottom: 0; }\n        .navbar ul.navbar-menu li a {\n          color: #ffffff; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 100vh;\n    transform: translateX(0); }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(0);\n    left: 25%; }\n  #navbar-toggle:checked + .page-wrap .content {\n    width: 100%;\n    margin-left: 0; }\n  ul.navbar-menu li {\n    color: #ffffff; } }\n", ""]);
 	
 	// exports
 
@@ -27546,6 +27510,8 @@
 	
 	__webpack_require__(/*! ../../css/style.css */ 238);
 	
+	var _reactRouterDom = __webpack_require__(/*! react-router-dom */ 211);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27970,6 +27936,91 @@
 	
 	    return register;
 	}(_react2.default.Component);
+
+/***/ }),
+/* 241 */
+/*!**************************************!*\
+  !*** ./src/app/components/Search.js ***!
+  \**************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.Search = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(/*! prop-types */ 187);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _main = __webpack_require__(/*! ./main */ 226);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Search = exports.Search = function (_React$Component) {
+	    _inherits(Search, _React$Component);
+	
+	    function Search() {
+	        _classCallCheck(this, Search);
+	
+	        return _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).apply(this, arguments));
+	    }
+	
+	    _createClass(Search, [{
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                _main.Main,
+	                null,
+	                _react2.default.createElement(
+	                    "div",
+	                    { style: { width: '100%' } },
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "align text--center", style: { width: '100%', top: '80px' } },
+	                        _react2.default.createElement(
+	                            "form",
+	                            { action: "#", method: "POST", style: { textAlign: 'center' } },
+	                            _react2.default.createElement(
+	                                "div",
+	                                { className: "form__field center-x", style: { whiteSpace: 'nowrap' } },
+	                                _react2.default.createElement("input", { className: "search form__input", id: "search", type: "text", style: { color: 'white', marginRight: '8px' }, name: "search", placeholder: "What book are you looking for?", required: true }),
+	                                _react2.default.createElement("input", { className: "submittt", name: "submit", type: "submit", value: "Search" })
+	                            )
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { style: { textAlign: 'center', marginTop: '110px' } },
+	                    "RESULTS"
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return Search;
+	}(_react2.default.Component);
+	
+	Search.propTypes = {
+	    name: _propTypes2.default.string,
+	    age: _propTypes2.default.number,
+	    user: _propTypes2.default.object
+	};
 
 /***/ })
 /******/ ]);

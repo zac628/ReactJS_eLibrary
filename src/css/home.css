@@ -1,0 +1,227 @@
+/* config.css */
+
+.fl-lt {
+    float: left;
+}
+
+.fl-rt {
+    float: right;
+}
+
+
+.center {
+    text-align: center;
+}
+
+.center-x {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.center-y {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.midcontainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+/* helpers/align.css */
+
+.align {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+
+
+html {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #2c3338;
+    color: #606468;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    height: 100%;
+    line-height: 1.5;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* modules/anchor.css */
+
+a {
+    color: #eee;
+    outline: 0;
+    text-decoration: none;
+}
+
+a:focus,
+a:hover {
+    text-decoration: underline;
+}
+
+/* modules/form.css */
+
+input {
+    background-image: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+}
+
+input[type='submit'] {
+    cursor: pointer;
+}
+
+.form {
+    margin: -14px;
+    margin: -0.875rem;
+}
+
+.search {
+    width: 100%;
+}
+
+.form__field {
+    margin: 14px;
+    margin: 0.875rem;
+}
+
+/* modules/login.css */
+
+.login {
+    color: #eee;
+}
+
+.search {
+    background-color: #3b4148;
+    border-radius: 0.25rem;
+    padding: 16px;
+    padding: 1rem;
+    width: 500px;
+}
+
+
+.submittt {
+    background-color: #ea4c88;
+    color: #eee;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 0.25rem;
+    padding: 16px;
+    padding: 1rem;
+}
+
+.search:focus,
+.search:hover {
+    background-color: #434a52;
+}
+
+.submittt:focus,
+.submittt:hover {
+    background-color: #d44179;
+}
+
+/* modules/text.css */
+
+p {
+    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
+    margin-top: 24px;
+    margin-top: 1.5rem;
+}
+
+.text--center {
+    text-align: center;
+}
+
+
+
+/* bar
+---------------------------------*/
+
+.bar {
+    background-color: #242a2d;
+    top: 0;
+    height: 70px;
+    z-index: 99;
+}
+
+
+/* menu
+---------------------------------*/
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    white-space: nowrap;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+#theMenu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translate3d(-100vw, 0, 0);
+
+    width: 100vw;
+    height: 100vh;
+}

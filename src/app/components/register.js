@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-//const css = require('../../css/login.css');
+//const css = require('../../css/menu.css');
 import '../../css/login.css';
 import '../../css/style.css';
 

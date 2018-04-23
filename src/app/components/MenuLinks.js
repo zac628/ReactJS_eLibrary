@@ -1,18 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { slide as Menu } from 'react-burger-menu'
+import SliderMenu from 'react-slider-menu';
+import './menu.scss';
+import {Link} from 'react-router';
+
 
 class MenuLinks extends React.Component {
-
     render () {
         return (
-            <Menu>
-                <a id="home" className="menu-item" href="/">Home</a>
-                <a id="about" className="menu-item" href="/about">About</a>
-                <a id="contact" className="menu-item" href="/contact">Contact</a>
-                <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
-            </Menu>
+            <div>
+            <input type="checkbox" id="navbar-toggle" name="" value="" />
+                <div className="page-wrap">
+                    <label htmlFor="navbar-toggle" className="toggle-button">☰</label>
+                    <div className="navbar">
+                        <ul className="navbar-menu">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Your Account</a></li>
+                            <li><a href="#">Previous Downloads</a></li>
+                            <li><a href="#">All Books</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         );
     }
 }

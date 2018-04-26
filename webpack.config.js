@@ -39,8 +39,20 @@ var config = {
                 test: /\.scss$/,
                 loaders: ['style-loader', 'css-loader', 'sass-loader']
             }
-        ]
+        ],
+        node: {
+            net: 'empty',
+            tls: 'empty',
+            dns: 'empty',
+            fs: 'empty'
+        }
 
+    },
+    node: {
+        net: 'empty',
+        tls: 'empty',
+        dns: 'empty',
+        fs: 'empty'
     },
     plugins: [
         new webpack.ProvidePlugin({

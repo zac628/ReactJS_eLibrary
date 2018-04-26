@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 
 import SliderMenu from 'react-slider-menu';
 import './menu.scss';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
+
 
 
 class MenuLinks extends React.Component {
@@ -15,10 +16,10 @@ class MenuLinks extends React.Component {
                     <label htmlFor="navbar-toggle" className="toggle-button">☰</label>
                     <div className="navbar">
                         <ul className="navbar-menu">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Your Account</a></li>
-                            <li><a href="#">Previous Downloads</a></li>
-                            <li><a href="#">All Books</a></li>
+                            <li><Link to={"/home"}>Home</Link></li>
+                            <li><Link to={"/home"}>Your Account</Link></li>
+                            <li><Link to={"/home"}>Previous Downloads</Link></li>
+                            <li><Link to={"/home"}>All Books</Link></li>
                         </ul>
                     </div>
                 </div>

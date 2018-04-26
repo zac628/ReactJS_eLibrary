@@ -26542,8 +26542,8 @@
 	                        "div",
 	                        { className: "fl-rt ", style: { padding: '10px', top: 0 } },
 	                        _react2.default.createElement(
-	                            "button",
-	                            { className: "submittt", type: "button", onClick: this.onNavSignIn.bind(this), style: { border: 'none', boxShadow: 'none' } },
+	                            _reactRouterDom.Link,
+	                            { className: "submittt", to: "/login", style: { border: 'none', boxShadow: 'none' } },
 	                            "Sign In"
 	                        )
 	                    ),
@@ -26752,7 +26752,7 @@
 	
 	__webpack_require__(/*! ./menu.scss */ 230);
 	
-	var _reactRouter = __webpack_require__(/*! react-router */ 184);
+	var _reactRouterDom = __webpack_require__(/*! react-router-dom */ 211);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -26796,8 +26796,8 @@
 	                                "li",
 	                                null,
 	                                _react2.default.createElement(
-	                                    "a",
-	                                    { href: "#" },
+	                                    _reactRouterDom.Link,
+	                                    { to: "/home" },
 	                                    "Home"
 	                                )
 	                            ),
@@ -26805,8 +26805,8 @@
 	                                "li",
 	                                null,
 	                                _react2.default.createElement(
-	                                    "a",
-	                                    { href: "#" },
+	                                    _reactRouterDom.Link,
+	                                    { to: "/home" },
 	                                    "Your Account"
 	                                )
 	                            ),
@@ -26814,8 +26814,8 @@
 	                                "li",
 	                                null,
 	                                _react2.default.createElement(
-	                                    "a",
-	                                    { href: "#" },
+	                                    _reactRouterDom.Link,
+	                                    { to: "/home" },
 	                                    "Previous Downloads"
 	                                )
 	                            ),
@@ -26823,8 +26823,8 @@
 	                                "li",
 	                                null,
 	                                _react2.default.createElement(
-	                                    "a",
-	                                    { href: "#" },
+	                                    _reactRouterDom.Link,
+	                                    { to: "/home" },
 	                                    "All Books"
 	                                )
 	                            )
@@ -27618,16 +27618,15 @@
 	                            { className: "text--center" },
 	                            "Not a member? ",
 	                            _react2.default.createElement(
-	                                "a",
-	                                { href: "#" },
+	                                _reactRouterDom.Link,
+	                                { to: "/register" },
 	                                "Sign up now"
 	                            ),
 	                            _react2.default.createElement("br", null),
 	                            "or ",
 	                            _react2.default.createElement(
-	                                "a",
-	                                {
-	                                    href: "home.php" },
+	                                _reactRouterDom.Link,
+	                                { to: "/home" },
 	                                "Continue as Guest"
 	                            ),
 	                            _react2.default.createElement("svg", { className: "icon" })
@@ -27811,9 +27810,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	__webpack_require__(/*! ../../css/login.css */ 236);
-	
-	__webpack_require__(/*! ../../css/style.css */ 238);
+	var _reactRouterDom = __webpack_require__(/*! react-router-dom */ 211);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27924,8 +27921,8 @@
 	                        { className: "text--center" },
 	                        "Skip Sign Up? ",
 	                        _react2.default.createElement(
-	                            "a",
-	                            { href: "home.php" },
+	                            _reactRouterDom.Link,
+	                            { to: "/home" },
 	                            "Continue as Guest"
 	                        )
 	                    )

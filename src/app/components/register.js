@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 //const css = require('../../css/menu.css');
-import '../../css/login.css';
-import '../../css/style.css';
+import {Link} from 'react-router-dom';
+
 
 export class register extends React.Component {
     constructor(props){
@@ -54,7 +54,7 @@ export class register extends React.Component {
 
                     </form>
 
-                    <p className="text--center">Skip Sign Up? <a href="home.php">Continue as Guest</a>
+                    <p className="text--center">Skip Sign Up? <Link to={"/home"}>Continue as Guest</Link>
 
                     </p>
 

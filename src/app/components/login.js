@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import '../../css/login.css';
 import '../../css/style.css';
-import {browserHistory,withRouter} from "react-router-dom";
+import {browserHistory,withRouter, Link} from "react-router-dom";
 
 
 export class login extends React.Component {
@@ -64,8 +64,7 @@ export class login extends React.Component {
 
                       </form>
 
-                      <p className="text--center">Not a member? <a href="#">Sign up now</a><br />or <a
-                          href="home.php">Continue as Guest</a>
+                      <p className="text--center">Not a member? <Link to={"/register"}>Sign up now</Link><br />or <Link to={"/home"}>Continue as Guest</Link>
                           <svg className="icon">
 
                           </svg>

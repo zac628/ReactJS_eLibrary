@@ -27539,6 +27539,13 @@
 	        key: "logIn",
 	        value: function logIn() {
 	            console.log('this.state', this.state);
+	            var _state = this.state,
+	                username = _state.username,
+	                password = _state.password;
+	
+	            fetch("http://localhost:8080/auth?user=" + username + "&pass=" + password, {
+	                method: 'POST'
+	            });
 	        }
 	    }, {
 	        key: "toggleHelpWindow",
@@ -27555,6 +27562,10 @@
 	        key: "render",
 	        value: function render() {
 	            var _this2 = this;
+	
+	            var _state2 = this.state,
+	                username = _state2.username,
+	                password = _state2.password;
 	
 	            return _react2.default.createElement(
 	                "div",
@@ -27587,7 +27598,10 @@
 	                                    )
 	                                ),
 	                                _react2.default.createElement("input", { id: "login__username", type: "text", name: "username", className: "form__input",
-	                                    placeholder: "Username", required: true })
+	                                    placeholder: "Username", required: true,
+	                                    onChange: function onChange(event) {
+	                                        return _this2.setState({ username: event.target.value });
+	                                    } })
 	                            ),
 	                            _react2.default.createElement(
 	                                "div",
@@ -27603,7 +27617,10 @@
 	                                    )
 	                                ),
 	                                _react2.default.createElement("input", { id: "login__password", type: "password", name: "password", className: "form__input",
-	                                    placeholder: "Password", required: true })
+	                                    placeholder: "Password", required: true,
+	                                    onChange: function onChange(event) {
+	                                        return _this2.setState({ password: event.target.value });
+	                                    } })
 	                            ),
 	                            _react2.default.createElement(
 	                                "div",

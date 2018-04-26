@@ -15,8 +15,15 @@ export class login extends React.Component {
     }
 
     logIn(){
-        console.log('this.state', this.state)
+        console.log('this.state', this.state);
+        const {username, password} = this.state;
+        fetch(`http://localhost:8080/auth?user=${username}&pass=${password}`,{
+            method: 'POST'
+        });
+
     }
+
+
     toggleHelpWindow() {
         var x = document.getElementById("helpWin");
         if (x.style.display === "none") {
@@ -28,6 +35,7 @@ export class login extends React.Component {
     }
 
     render(){
+        const {username, password} = this.state;
         return(
           <div>
               <div>
@@ -45,7 +53,8 @@ export class login extends React.Component {
                                   </svg>
                                   <span className="hidden">Username</span></label>
                               <input id="login__username" type="text" name="username" className="form__input"
-                                     placeholder="Username" required />
+                                     placeholder="Username" required
+                                     onChange={event => this.setState({username:event.target.value})}/>
                           </div>
 
                           <div className="form__field">
@@ -55,7 +64,8 @@ export class login extends React.Component {
                                   </svg>
                                   <span className="hidden">Password</span></label>
                               <input id="login__password" type="password" name="password" className="form__input"
-                                     placeholder="Password" required />
+                                     placeholder="Password" required
+                                     onChange={event => this.setState({password:event.target.value})}/>
                           </div>
 
                           <div className="form__field">

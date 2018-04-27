@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-//const css = require('../../css/menu.css');
+//const css = require('../../css/menu.scss');
 import {Link} from 'react-router-dom';
 
 

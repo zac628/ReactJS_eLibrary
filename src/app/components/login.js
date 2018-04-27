@@ -10,17 +10,17 @@ export class login extends React.Component {
         super(props);
         this.state={
             username: "",
-            password: ""
+            password: "",
+            books: ""
         }
     }
 
     logIn(){
         console.log('this.state', this.state);
         const {username, password} = this.state;
-        fetch(`http://localhost:8080/auth?user=${username}&pass=${password}`,{
-            method: 'POST'
-        });
-
+        fetch(`/auth?user=${username}&pass=${password}`)
+            .then(res => res.json())
+            .then(books => this.setState({books}, () => console.log("fetched", )));
     }
 
 

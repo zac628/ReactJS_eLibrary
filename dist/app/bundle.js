@@ -65,7 +65,7 @@
 	
 	var _Home = __webpack_require__(/*! ./components/Home */ 225);
 	
-	var _login = __webpack_require__(/*! ./components/login */ 235);
+	var _login = __webpack_require__(/*! ./components/login */ 234);
 	
 	var _register = __webpack_require__(/*! ./components/register */ 240);
 	
@@ -26848,7 +26848,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	
-	var content = __webpack_require__(/*! !../../../~/css-loader!../../../~/sass-loader/lib/loader.js!./menu.scss */ 231);
+	var content = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./menu.scss\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	
@@ -26862,7 +26862,7 @@
 	options.transform = transform
 	options.insertInto = undefined;
 	
-	var update = __webpack_require__(/*! ../../../~/style-loader/lib/addStyles.js */ 233)(content, options);
+	var update = __webpack_require__(/*! ../../../~/style-loader/lib/addStyles.js */ 232)(content, options);
 	
 	if(content.locals) module.exports = content.locals;
 	
@@ -26894,109 +26894,8 @@
 	}
 
 /***/ }),
-/* 231 */
-/*!***********************************************************************************!*\
-  !*** ./~/css-loader!./~/sass-loader/lib/loader.js!./src/app/components/menu.scss ***!
-  \***********************************************************************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(/*! ../../../~/css-loader/lib/css-base.js */ 232)(false);
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "html {\n  font-size: 10px; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  color: #22313a;\n  background-color: #ffffff;\n  font-family: 'Helvetica Neue', sans-serif; }\n\na {\n  text-decoration: none; }\n\nul {\n  list-style: none; }\n\n/* Sidebar Styles */\n.page-wrap {\n  display: block;\n  position: relative;\n  width: 100%; }\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: calc(98% - 6vh);\n    display: block;\n    height: 7vh;\n    width: 7vh;\n    line-height: 7vh;\n    margin-top: 0.5vh;\n    background-color: #d95887;\n    color: #ffffff;\n    text-align: center;\n    font-size: 7vh;\n    z-index: 10;\n    cursor: pointer;\n    webkit-transition: all 0.3s ease-in-out;\n    -moz-transition: all 0.3s ease-in-out;\n    -o-transition: all 0.3s ease-in-out;\n    transition: all 0.3s ease-in-out; }\n\n.content {\n  position: relative;\n  width: 100%;\n  margin-top: 15vh;\n  text-align: center;\n  font-size: 1.5rem;\n  webkit-transition: all 0.3s ease-in-out;\n  -moz-transition: all 0.3s ease-in-out;\n  -o-transition: all 0.3s ease-in-out;\n  transition: all 0.3s ease-in-out; }\n\n.navbar {\n  display: flex;\n  justify-content: space-around;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  height: 8vh;\n  left: -100%;\n  width: 100%;\n  transform: translateX(-100%);\n  background-color: #252a2d;\n  color: #ffffff;\n  text-align: center;\n  z-index: 10;\n  webkit-transition: all 0.3s ease-in-out;\n  -moz-transition: all 0.3s ease-in-out;\n  -o-transition: all 0.3s ease-in-out;\n  transition: all 0.3s ease-in-out; }\n  .navbar .navbar-logo, .navbar ul.navbar-social {\n    position: absolute;\n    top: 0;\n    height: 8vh;\n    line-height: 8vh; }\n  .navbar .navbar-logo {\n    left: 2%; }\n    .navbar .navbar-logo h2 {\n      display: inline; }\n  .navbar ul.navbar-social {\n    display: flex;\n    justify-content: space-between;\n    width: 30%;\n    margin: 0;\n    padding: 0;\n    background-color: #252a2d;\n    z-index: 100; }\n    .navbar ul.navbar-social li {\n      margin-top: 1vh;\n      float: left; }\n      .navbar ul.navbar-social li a {\n        color: #ffffff;\n        text-decoration: none; }\n        .navbar ul.navbar-social li a:hover i {\n          color: #d95887; }\n        .navbar ul.navbar-social li a i {\n          font-size: 2rem;\n          webkit-transition: all 0.3s ease-in-out;\n          -moz-transition: all 0.3s ease-in-out;\n          -o-transition: all 0.3s ease-in-out;\n          transition: all 0.3s ease-in-out; }\n  .navbar ul.navbar-menu {\n    position: absolute;\n    bottom: 1vh;\n    width: 30%;\n    margin: 0;\n    text-transform: uppercase;\n    font-size: 1.5rem; }\n    .navbar ul.navbar-menu li {\n      margin: 1rem 0; }\n      .navbar ul.navbar-menu li:last-child {\n        margin-bottom: 0; }\n      .navbar ul.navbar-menu li a {\n        color: #ffffff;\n        webkit-transition: all 0.3s ease-in-out;\n        -moz-transition: all 0.3s ease-in-out;\n        -o-transition: all 0.3s ease-in-out;\n        transition: all 0.3s ease-in-out; }\n        .navbar ul.navbar-menu li a:hover {\n          color: #d95887; }\n\n#navbar-toggle {\n  display: none; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 24vh; }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(16vh); }\n\n@media (max-width: 700px) {\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 7vh;\n    line-height: 7vh;\n    width: 7vh;\n    margin-top: 0.5vh;\n    z-index: 100; }\n  .navbar {\n    height: 12vh; }\n    .navbar .navbar-logo, .navbar .navbar-social {\n      height: 12vh;\n      line-height: 12vh; }\n    .navbar .navbar-logo {\n      height: 3vh; }\n      .navbar .navbar-logo h2 {\n        font-size: 2rem; }\n    .navbar ul.navbar-social {\n      height: 12vh; }\n      .navbar ul.navbar-social li {\n        margin-top: 3vh; }\n        .navbar ul.navbar-social li a i {\n          font-size: 2.5rem; }\n    .navbar ul.navbar-menu {\n      bottom: 3vh;\n      width: 30%;\n      font-size: 1.8rem; }\n      .navbar ul.navbar-menu li {\n        margin: 2rem 0; }\n        .navbar ul.navbar-menu li a {\n          color: #ffffff; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 48vh;\n    left: 100%; }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(36vh); } }\n\n@media (min-width: 700px) {\n  .content {\n    width: 75%;\n    margin-left: 25%;\n    margin-top: 0; }\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 45px;\n    width: 45px;\n    line-height: 40px;\n    margin-top: 0;\n    font-size: 35px; }\n  .navbar {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 100vh;\n    width: 25%; }\n    .navbar .navbar-logo {\n      top: 10%;\n      height: 20%;\n      width: 100%;\n      left: 0; }\n      .navbar .navbar-logo h2 {\n        font-size: 2rem; }\n    .navbar ul.navbar-social {\n      top: 20%;\n      height: 10%;\n      z-index: 0;\n      font-size: 1.5rem; }\n      .navbar ul.navbar-social li {\n        height: 1.5rem;\n        width: 1.5rem; }\n        .navbar ul.navbar-social li a {\n          color: #ffffff;\n          text-decoration: none; }\n          .navbar ul.navbar-social li a i {\n            font-size: 3rem; }\n    .navbar ul.navbar-menu {\n      position: absolute;\n      top: 0;\n      width: 100%;\n      margin: 0;\n      padding: 0;\n      font-size: 1.6rem; }\n      .navbar ul.navbar-menu li {\n        margin: 2rem 0; }\n        .navbar ul.navbar-menu li:last-child {\n          margin-bottom: 0; }\n        .navbar ul.navbar-menu li a {\n          color: #ffffff; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 100vh;\n    transform: translateX(0); }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(0);\n    left: 25%; }\n  #navbar-toggle:checked + .page-wrap .content {\n    width: 100%;\n    margin-left: 0; }\n  ul.navbar-menu li {\n    color: #ffffff; } }\n", ""]);
-	
-	// exports
-
-
-/***/ }),
+/* 231 */,
 /* 232 */
-/*!**************************************!*\
-  !*** ./~/css-loader/lib/css-base.js ***!
-  \**************************************/
-/***/ (function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function(useSourceMap) {
-		var list = [];
-	
-		// return the list of modules as css string
-		list.toString = function toString() {
-			return this.map(function (item) {
-				var content = cssWithMappingToString(item, useSourceMap);
-				if(item[2]) {
-					return "@media " + item[2] + "{" + content + "}";
-				} else {
-					return content;
-				}
-			}).join("");
-		};
-	
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-	
-	function cssWithMappingToString(item, useSourceMap) {
-		var content = item[1] || '';
-		var cssMapping = item[3];
-		if (!cssMapping) {
-			return content;
-		}
-	
-		if (useSourceMap && typeof btoa === 'function') {
-			var sourceMapping = toComment(cssMapping);
-			var sourceURLs = cssMapping.sources.map(function (source) {
-				return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-			});
-	
-			return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-		}
-	
-		return [content].join('\n');
-	}
-	
-	// Adapted from convert-source-map (MIT)
-	function toComment(sourceMap) {
-		// eslint-disable-next-line no-undef
-		var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-		var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-	
-		return '/*# ' + data + ' */';
-	}
-
-
-/***/ }),
-/* 233 */
 /*!*****************************************!*\
   !*** ./~/style-loader/lib/addStyles.js ***!
   \*****************************************/
@@ -27065,7 +26964,7 @@
 	var	singletonCounter = 0;
 	var	stylesInsertedAtTop = [];
 	
-	var	fixUrls = __webpack_require__(/*! ./urls */ 234);
+	var	fixUrls = __webpack_require__(/*! ./urls */ 233);
 	
 	module.exports = function(list, options) {
 		if (true) {
@@ -27385,7 +27284,7 @@
 
 
 /***/ }),
-/* 234 */
+/* 233 */
 /*!************************************!*\
   !*** ./~/style-loader/lib/urls.js ***!
   \************************************/
@@ -27483,7 +27382,7 @@
 
 
 /***/ }),
-/* 235 */
+/* 234 */
 /*!*************************************!*\
   !*** ./src/app/components/login.js ***!
   \*************************************/
@@ -27506,7 +27405,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	__webpack_require__(/*! ../../css/login.css */ 236);
+	__webpack_require__(/*! ../../css/login.css */ 235);
 	
 	__webpack_require__(/*! ../../css/style.css */ 238);
 	
@@ -27530,7 +27429,8 @@
 	
 	        _this.state = {
 	            username: "",
-	            password: ""
+	            password: "",
+	            books: ""
 	        };
 	        return _this;
 	    }
@@ -27538,13 +27438,19 @@
 	    _createClass(login, [{
 	        key: "logIn",
 	        value: function logIn() {
+	            var _this2 = this;
+	
 	            console.log('this.state', this.state);
 	            var _state = this.state,
 	                username = _state.username,
 	                password = _state.password;
 	
-	            fetch("http://localhost:8080/auth?user=" + username + "&pass=" + password, {
-	                method: 'POST'
+	            fetch("/auth?user=" + username + "&pass=" + password).then(function (res) {
+	                return res.json();
+	            }).then(function (books) {
+	                return _this2.setState({ books: books }, function () {
+	                    return console.log("fetched");
+	                });
 	            });
 	        }
 	    }, {
@@ -27561,7 +27467,7 @@
 	    }, {
 	        key: "render",
 	        value: function render() {
-	            var _this2 = this;
+	            var _this3 = this;
 	
 	            var _state2 = this.state,
 	                username = _state2.username,
@@ -27600,7 +27506,7 @@
 	                                _react2.default.createElement("input", { id: "login__username", type: "text", name: "username", className: "form__input",
 	                                    placeholder: "Username", required: true,
 	                                    onChange: function onChange(event) {
-	                                        return _this2.setState({ username: event.target.value });
+	                                        return _this3.setState({ username: event.target.value });
 	                                    } })
 	                            ),
 	                            _react2.default.createElement(
@@ -27619,14 +27525,14 @@
 	                                _react2.default.createElement("input", { id: "login__password", type: "password", name: "password", className: "form__input",
 	                                    placeholder: "Password", required: true,
 	                                    onChange: function onChange(event) {
-	                                        return _this2.setState({ password: event.target.value });
+	                                        return _this3.setState({ password: event.target.value });
 	                                    } })
 	                            ),
 	                            _react2.default.createElement(
 	                                "div",
 	                                { className: "form__field" },
 	                                _react2.default.createElement("input", { type: "button", name: "submit", value: "Sign In", onClick: function onClick() {
-	                                        return _this2.logIn();
+	                                        return _this3.logIn();
 	                                    } })
 	                            )
 	                        ),
@@ -27653,7 +27559,7 @@
 	                    _react2.default.createElement("img", { className: "chat-icon", src: "../../img/scroll.gif", width: "80px", height: "120px", style: { marginRight: '200px', bottom: '38px', border: 'none', boxShadow: 'none', borderRadius: '0px', transform: 'rotate(270deg)' } }),
 	                    _react2.default.createElement("img", { className: "chat-icon", src: "../../img/scroll.gif", width: "80px", height: "120px", style: { marginRight: '200px', bottom: '38px', border: 'none', boxShadow: 'none', borderRadius: '0px', transform: 'rotate(270deg)' } }),
 	                    _react2.default.createElement("img", { className: "chat-icon", src: "../../img/help.png", width: "80px", height: "80px", onClick: function onClick() {
-	                            return _this2.toggleHelpWindow();
+	                            return _this3.toggleHelpWindow();
 	                        } })
 	                )
 	            );
@@ -27664,14 +27570,14 @@
 	}(_react2.default.Component);
 
 /***/ }),
-/* 236 */
+/* 235 */
 /*!***************************!*\
   !*** ./src/css/login.css ***!
   \***************************/
 /***/ (function(module, exports, __webpack_require__) {
 
 	
-	var content = __webpack_require__(/*! !../../~/css-loader!./login.css */ 237);
+	var content = __webpack_require__(/*! !../../~/css-loader!./login.css */ 236);
 	
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	
@@ -27685,7 +27591,7 @@
 	options.transform = transform
 	options.insertInto = undefined;
 	
-	var update = __webpack_require__(/*! ../../~/style-loader/lib/addStyles.js */ 233)(content, options);
+	var update = __webpack_require__(/*! ../../~/style-loader/lib/addStyles.js */ 232)(content, options);
 	
 	if(content.locals) module.exports = content.locals;
 	
@@ -27717,13 +27623,13 @@
 	}
 
 /***/ }),
-/* 237 */
+/* 236 */
 /*!******************************************!*\
   !*** ./~/css-loader!./src/css/login.css ***!
   \******************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ../../~/css-loader/lib/css-base.js */ 232)(false);
+	exports = module.exports = __webpack_require__(/*! ../../~/css-loader/lib/css-base.js */ 237)(false);
 	// imports
 	
 	
@@ -27731,6 +27637,91 @@
 	exports.push([module.id, "/* config.css */\n\n/* helpers/align.css */\n\n.align {\n    -webkit-box-align: center;\n    -ms-flex-align: center;\n    align-items: center;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -ms-flex-direction: column;\n    flex-direction: column;\n    -webkit-box-pack: center;\n    -ms-flex-pack: center;\n    justify-content: center;\n}\n\n/* helpers/grid.css */\n\n.grid {\n    margin-left: auto;\n    margin-right: auto;\n    max-width: 320px;\n    max-width: 20rem;\n    width: 90%;\n}\n\n/* helpers/hidden.css */\n\n.hidden {\n    border: 0;\n    clip: rect(0 0 0 0);\n    height: 1px;\n    margin: -1px;\n    overflow: hidden;\n    padding: 0;\n    position: absolute;\n    width: 1px;\n}\n\n/* helpers/icon.css */\n\n.icons {\n    display: none;\n}\n\n.icon {\n    display: inline-block;\n    fill: #606468;\n    font-size: 16px;\n    font-size: 1rem;\n    height: 1em;\n    vertical-align: middle;\n    width: 1em;\n}\n\n/* layout/base.css */\n\n* {\n    -webkit-box-sizing: inherit;\n    box-sizing: inherit;\n}\n\nhtml {\n    -webkit-box-sizing: border-box;\n    box-sizing: border-box;\n    font-size: 100%;\n    height: 100%;\n}\n\nbody {\n    background-color: #2c3338;\n    color: #606468;\n    font-family: 'Open Sans', sans-serif;\n    font-size: 14px;\n    font-size: 0.875rem;\n    font-weight: 400;\n    height: 100%;\n    line-height: 1.5;\n    margin: 0;\n    min-height: 100vh;\n}\n\n/* modules/anchor.css */\n\na {\n    color: #eee;\n    outline: 0;\n    text-decoration: none;\n}\n\na:focus,\na:hover {\n    text-decoration: underline;\n}\n\n/* modules/form.css */\n\ninput {\n    background-image: none;\n    border: 0;\n    color: inherit;\n    font: inherit;\n    margin: 0;\n    outline: 0;\n    padding: 0;\n    -webkit-transition: background-color 0.3s;\n    transition: background-color 0.3s;\n}\n\ninput[type='submit'] {\n    cursor: pointer;\n}\n\n.form {\n    margin: -14px;\n    margin: -0.875rem;\n}\n\n.form input[type='password'],\n.form input[type='text'],\n.form input[type='submit'],\n.form input[type='button']{\n    width: 100%;\n}\n\n.form__field {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    margin: 14px;\n    margin: 0.875rem;\n}\n\n.form__input {\n    -webkit-box-flex: 1;\n    -ms-flex: 1;\n    flex: 1;\n}\n\n/* modules/menu.css */\n\n.login {\n    color: #eee;\n}\n\n.login label,\n.login input[type='text'],\n.login input[type='password'],\n.login input[type='submit'],\n.form input[type='button'] {\n    border-radius: 0.25rem;\n    padding: 16px;\n    padding: 1rem;\n}\n\n.login label {\n    background-color: #363b41;\n    border-bottom-right-radius: 0;\n    border-top-right-radius: 0;\n    padding-left: 20px;\n    padding-left: 1.25rem;\n    padding-right: 20px;\n    padding-right: 1.25rem;\n}\n\n.desc {\n    background-color: #3b4148;\n    border-bottom-left-radius: 0;\n    border-top-left-radius: 0;\n    border: none;\n    resize: none;\n    max-width: 200px;\n    max-width: 10rem;\n    min-height: 220px;\n    color: #eee;\n    border-radius: 0.25rem;\n    padding: 16px;\n    padding: 1rem;\n    font: inherit;\n}\n\n.login input[type='password'],\n.login input[type='text'] {\n    background-color: #3b4148;\n    border-bottom-left-radius: 0;\n    border-top-left-radius: 0;\n}\n\n.desc:focus,\n.desc:hover,\n.login input[type='password']:focus,\n.login input[type='password']:hover,\n.login input[type='text']:focus,\n.login input[type='text']:hover {\n    background-color: #434a52;\n}\n\n.login input[type='submit'],\n.form input[type='button'] {\n    background-color: #ea4c88;\n    color: #eee;\n    font-weight: 700;\n    text-transform: uppercase;\n}\n\n.login input[type='submit']:focus,\n.login input[type='submit']:hover,\n.form input[type='button']:focus,\n.form input[type='button']:hover{\n    background-color: #d44179;\n}\n\n/* modules/text.css */\n\np {\n    margin-bottom: 24px;\n    margin-bottom: 1.5rem;\n    margin-top: 24px;\n    margin-top: 1.5rem;\n}\n\n.text--center {\n    text-align: center;\n}\n\n\n\n\nimg {\n    max-width: 180px;\n}\n\ninput[type=file] {\n    padding: 10px;\n    background: #2d2d2d;\n}\n\n\n.chat-icon {\n    position: fixed;\n    right: 20px;\n    bottom: 60px;\n    z-index: 999;\n    border: 1px solid #333;\n    border-radius: 40px;\n    box-shadow: 0px 0px 23px 3px rgba(0, 0, 0, .3), inset 0px 0px 0px rgba(255, 255, 255, 0.07);\n    cursor: pointer;\n    transition: all .1s linear;\n\n}\n\n.chat-icon:active,\n.link:focus {\n    /*background: #35a835;*/\n    transform: translateY(4px);\n    /*color:#222222 !important;*/\n}\n\n\n/* Manipulate\n---------------------------------*/\n\n.center {\n    text-align: center;\n}\n\n.center-x {\n    position: absolute;\n    left: 50%;\n    transform: translateX(-50%);\n}\n\n.center-y {\n    position: absolute;\n    top: 50%;\n    transform: translateY(-50%);\n}\n\n.midcontainer {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translateX(-50%) translateY(-50%);\n}\n\n/* Primary Styles\n---------------------------------*/\n", ""]);
 	
 	// exports
+
+
+/***/ }),
+/* 237 */
+/*!**************************************!*\
+  !*** ./~/css-loader/lib/css-base.js ***!
+  \**************************************/
+/***/ (function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function(useSourceMap) {
+		var list = [];
+	
+		// return the list of modules as css string
+		list.toString = function toString() {
+			return this.map(function (item) {
+				var content = cssWithMappingToString(item, useSourceMap);
+				if(item[2]) {
+					return "@media " + item[2] + "{" + content + "}";
+				} else {
+					return content;
+				}
+			}).join("");
+		};
+	
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+	
+	function cssWithMappingToString(item, useSourceMap) {
+		var content = item[1] || '';
+		var cssMapping = item[3];
+		if (!cssMapping) {
+			return content;
+		}
+	
+		if (useSourceMap && typeof btoa === 'function') {
+			var sourceMapping = toComment(cssMapping);
+			var sourceURLs = cssMapping.sources.map(function (source) {
+				return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+			});
+	
+			return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+		}
+	
+		return [content].join('\n');
+	}
+	
+	// Adapted from convert-source-map (MIT)
+	function toComment(sourceMap) {
+		// eslint-disable-next-line no-undef
+		var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+		var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+	
+		return '/*# ' + data + ' */';
+	}
 
 
 /***/ }),
@@ -27755,7 +27746,7 @@
 	options.transform = transform
 	options.insertInto = undefined;
 	
-	var update = __webpack_require__(/*! ../../~/style-loader/lib/addStyles.js */ 233)(content, options);
+	var update = __webpack_require__(/*! ../../~/style-loader/lib/addStyles.js */ 232)(content, options);
 	
 	if(content.locals) module.exports = content.locals;
 	
@@ -27793,7 +27784,7 @@
   \******************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ../../~/css-loader/lib/css-base.js */ 232)(false);
+	exports = module.exports = __webpack_require__(/*! ../../~/css-loader/lib/css-base.js */ 237)(false);
 	// imports
 	
 	
@@ -27991,12 +27982,37 @@
 	    function Search() {
 	        _classCallCheck(this, Search);
 	
-	        return _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this));
+	
+	        _this.state = {
+	            toSearch: "",
+	            found: []
+	        };
+	        return _this;
 	    }
 	
 	    _createClass(Search, [{
+	        key: "goSearch",
+	        value: function goSearch() {
+	            var _this2 = this;
+	
+	            var _state = this.state,
+	                word = _state.word,
+	                found = _state.found;
+	
+	            fetch("http://localhost:1337/find?keyword=" + this.state.toSearch).then(function (res) {
+	                return res.json();
+	            }).then(function (results) {
+	                return _this2.setState({ found: found }, function () {
+	                    return console.log("fetched", results);
+	                });
+	            });
+	        }
+	    }, {
 	        key: "render",
 	        value: function render() {
+	            var _this3 = this;
+	
 	            return _react2.default.createElement(
 	                _main.Main,
 	                null,
@@ -28007,21 +28023,40 @@
 	                        "div",
 	                        { className: "align text--center", style: { width: '100%', top: '80px' } },
 	                        _react2.default.createElement(
-	                            "form",
-	                            { action: "#", method: "POST", style: { textAlign: 'center' } },
-	                            _react2.default.createElement(
-	                                "div",
-	                                { className: "form__field center-x", style: { whiteSpace: 'nowrap' } },
-	                                _react2.default.createElement("input", { className: "search form__input", id: "search", type: "text", style: { color: 'white', marginRight: '8px' }, name: "search", placeholder: "What book are you looking for?", required: true }),
-	                                _react2.default.createElement("input", { className: "submittt", name: "submit", type: "submit", value: "Search" })
-	                            )
+	                            "div",
+	                            { className: "form__field center-x", style: { whiteSpace: 'nowrap' } },
+	                            _react2.default.createElement("input", { className: "search form__input", id: "search", type: "text", style: { color: 'white', marginRight: '8px' }, name: "search", placeholder: "What book are you looking for?", required: true,
+	                                onChange: function onChange(event) {
+	                                    return _this3.setState({ toSearch: event.target.value });
+	                                }
+	                            }),
+	                            _react2.default.createElement("input", { className: "submittt", name: "submit", type: "button", value: "Search",
+	                                onClick: function onClick() {
+	                                    return _this3.goSearch();
+	                                }
+	                            })
 	                        )
 	                    )
 	                ),
 	                _react2.default.createElement(
 	                    "div",
 	                    { style: { textAlign: 'center', marginTop: '110px' } },
-	                    "RESULTS"
+	                    _react2.default.createElement(
+	                        "h1",
+	                        null,
+	                        "Results"
+	                    ),
+	                    _react2.default.createElement(
+	                        "ul",
+	                        null,
+	                        this.state.found.map(function (books) {
+	                            return _react2.default.createElement(
+	                                "li",
+	                                { key: books.id },
+	                                books.title
+	                            );
+	                        })
+	                    )
 	                )
 	            );
 	        }

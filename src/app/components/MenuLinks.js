@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import SliderMenu from 'react-slider-menu';
-//import './menu.scss';
+import './menu.scss';
 import {Link} from 'react-router-dom';
 
 

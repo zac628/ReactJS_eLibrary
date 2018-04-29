@@ -8,24 +8,42 @@ export class Search extends React.Component{
         super();
         this.state={
             toSearch: "",
+            height: true,
+            match: false,
             found: []
         }
     }
+
+    changeHeight(){
+        if(this.state.match) {
+            this.setState({height: false})
+        }else if(!this.state.match){
+            this.setState({height: true})
+        }
+    }
+
+    update(event){
+        this.setState({toSearch:event.target.value});
+        this.setState({match: true});
+        console.log('bool', this.state.match)
+    }
     goSearch(){
-        const { word, found } = this.state;
+        this.changeHeight();
+        const { word,height, found } = this.state;
         fetch(`http://localhost:1337/find?keyword=${this.state.toSearch}`)
             .then(res => res.json())
             .then(results => this.setState({found:results}, () => console.log("fetched", found)));
     }
     render(){
+        let inHeight = this.state.height ? "50%" : "110px";
         return(
             <Main>
                 <div style={{width: '100%'}}>
-                    <div className="align text--center" style={{width: '100%', top: '110px'}}>
+                    <div className="align text--center" style={{zIndex:999, width: '100%', top: inHeight}}>
 
-                            <div className="form__field center-x" style={{whiteSpace: 'nowrap'}}>
+                            <div className="form__field center-x" style={{whiteSpace: 'nowrap'}} >
                                 <input className="search form__input" id="search" type="text" style={{color:'white',marginRight: '8px'}} name="search" placeholder="What book are you looking for?" required
-                                       onChange={event => this.setState({toSearch:event.target.value})}
+                                       onChange={event => {this.update(event)}}
                                 />
                                     <input className="submittt" name="submit" type="button" value="Search"
                                            onClick={() => this.goSearch()}
@@ -44,6 +62,7 @@ export class Search extends React.Component{
 
 
                             <table className="center-x" style={{width:800, color:'white', borderColor:'#2c3338', position: 'relative'}}>
+                                <tbody>
                                 <tr>
                                     <th> </th>
                                 </tr>
@@ -74,6 +93,7 @@ export class Search extends React.Component{
                                 </td>
 
                             </tr>
+                                </tbody>
                 </table>
                             <br/>
                             <br/>

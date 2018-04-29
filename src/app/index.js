@@ -15,8 +15,8 @@ class App extends React.Component{
         return(
             <Router history={browserHistory}>
                 <div>
-                    <Route exact path="/" component={Home}/>
-                    <Route path="/home" component={Home}/>
+                    <Route exact path="/" component={Search}/>
+                    <Route path="/home" component={Search}/>
                     <Route path="/login" component={login}/>
                     <Route path="/register" component={register}/>
                     <Route path="/search" component={Search}/>

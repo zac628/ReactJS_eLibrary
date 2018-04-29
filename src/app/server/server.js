@@ -65,6 +65,31 @@ app.get('/users', function(req, res){
     });
 });
 
+
+app.get('/all', function(req, res, next) {
+    const TO_SEARCH = `SELECT * FROM books`;
+    connection.query(TO_SEARCH, function(error, results){
+        if(!!error){
+            console.log(error);
+            res.send('Something went wrong');
+        }else{
+            //res.json(results.length);
+            if(results.length > 0) {
+                //book found
+                //res.json(results);
+                return res.json(results);
+                next();
+            }else{
+                return res.json("no book found");
+            }
+        }
+    });
+});
+
+app.get('/add', function(req, res) {
+
+});
+
 app.get('/auth', function(req, res, next){
     const {user, pass} = req.query;
     const AUTH_USER = `Select * FROM users WHERE username = '${user}' AND password = '${pass}'`;

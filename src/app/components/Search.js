@@ -39,7 +39,7 @@ export class Search extends React.Component{
         return(
             <Main>
                 <div style={{width: '100%'}}>
-                    <div className="align text--center" style={{zIndex:999, width: '100%', top: inHeight}}>
+                    <div className="align text--center" style={{zIndex:5, width: '100%', top: inHeight}}>
 
                             <div className="form__field center-x" style={{whiteSpace: 'nowrap'}} >
                                 <input className="search form__input" id="search" type="text" style={{color:'white',marginRight: '8px'}} name="search" placeholder="What book are you looking for?" required

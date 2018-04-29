@@ -7,6 +7,8 @@ import { Home } from "./components/Home";
 import { login } from "./components/login";
 import { register } from "./components/register";
 import { Search } from "./components/Search";
+import { add } from "./components/addBook";
+import { getAll } from "./components/allBooks";
 import { Main } from "./components/main";
 
 
@@ -20,6 +22,8 @@ class App extends React.Component{
                     <Route path="/login" component={login}/>
                     <Route path="/register" component={register}/>
                     <Route path="/search" component={Search}/>
+                    <Route path="/allbooks" component={getAll}/>
+                    <Route path="/addbook" component={add}/>
                 </div>
             </Router>
         );

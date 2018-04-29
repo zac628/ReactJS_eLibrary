@@ -56,7 +56,7 @@ app.get('/users', function(req, res){
             console.log(error)
         }else{
             //parse
-            console.log('success')
+            console.log('success - query ran')
         }
 
         return res.json({
@@ -65,7 +65,7 @@ app.get('/users', function(req, res){
     });
 });
 
-app.get('/auth', function(req, res){
+app.get('/auth', function(req, res, next){
     const {user, pass} = req.query;
     const AUTH_USER = `Select * FROM users WHERE username = '${user}' AND password = '${pass}'`;
     connection.query(AUTH_USER, function(error, results){
@@ -74,15 +74,24 @@ app.get('/auth', function(req, res){
             res.send('Something went wrong');
         }else{
             if(results.length >0) {
+                const name = results[0].name;
+                const lvl = results[0].user_lvl;
                 //user found
-                res.cookie('eLibUsername', results[0].username);
-                res.cookie('eLibName', results[0].name);
-                res.send(results[0].name);
+                /*
+                res.cookie('eLibUsername', results[0].username,{path: '/',httpOnly : false});
+                res.cookie('eLibName', results[0].name, {path: '/',httpOnly : false});
+                res.cookie('eLibLvl', results[0].user_lvl, {path: '/', httpOnly : false});
+                */
+                //res.send(results[0].name);
                 console.log('success');
-                //res.redirect('http://localhost:8080/home');
+                //res.redirect('http://localhost:8080/');
+                return res.json([name, lvl]);
+                //next();
+
             }else{
                 console.log('Something went wrong');
-                res.send('Something went wrong');
+                //res.send('Something went wrong');
+                return res.json(false);
             }
         }
     });

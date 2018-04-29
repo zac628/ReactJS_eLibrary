@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import SliderMenu from 'react-slider-menu';
 import MenuLinks from './MenuLinks';
 import {browserHistory,withRouter, Link} from "react-router-dom";
-
+import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 
 
 
@@ -12,6 +12,8 @@ export class Header extends React.Component {
         this.props.history.push("/login");
     }
     render(){
+        const cookie_key2 = 'eLibName';
+        const name = read_cookie(cookie_key2);
         return(
             <div>
             <div className="bar">
@@ -26,7 +28,7 @@ export class Header extends React.Component {
                     </Link>
                 </div>
                 <div className="text--center center-x" style={{top:'0px', fontSize:'2em', paddingTop:'30px', position:'absolute'}}>
-                    Hey, User
+                    Hey, {name}
                 </div>
 
             </div>

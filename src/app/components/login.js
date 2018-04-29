@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import '../../css/login.css';
 import '../../css/style.css';
 import {browserHistory,withRouter, Link} from "react-router-dom";
+import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
+
 
 
 export class login extends React.Component {
@@ -11,16 +13,26 @@ export class login extends React.Component {
         this.state={
             username: "",
             password: "",
-            books: ""
+            authPass: []
         }
     }
 
     logIn(){
         console.log('this.state', this.state);
-        const {username, password} = this.state;
-        fetch(`/auth?user=${username}&pass=${password}`)
+        const {username, password, authPass} = this.state;
+        fetch(`http://localhost:1337/auth?user=${username}&pass=${password}`)
             .then(res => res.json())
-            .then(books => this.setState({books}, () => console.log("fetched", )));
+            .then(results => this.setState({authPass:results}, () => {if(this.state.authPass){
+                const cookie_key1 = 'eLibUser';
+                const cookie_key2 = 'eLibName';
+                const cookie_key3 = 'eLibLvl';
+                bake_cookie(cookie_key1, this.state.username);
+                bake_cookie(cookie_key2, this.state.authPass[0]);
+                bake_cookie(cookie_key3, this.state.authPass[1]);
+                document.location.replace('/home');
+            }}));
+            //.then(results => {if(this.state.authPass){document.location.replace('/home')}});
+
     }
 
 

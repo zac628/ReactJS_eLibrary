@@ -67,9 +67,9 @@
 	
 	var _login = __webpack_require__(/*! ./components/login */ 235);
 	
-	var _register = __webpack_require__(/*! ./components/register */ 240);
+	var _register = __webpack_require__(/*! ./components/register */ 241);
 	
-	var _Search = __webpack_require__(/*! ./components/Search */ 241);
+	var _Search = __webpack_require__(/*! ./components/Search */ 242);
 	
 	var _main = __webpack_require__(/*! ./components/main */ 226);
 	
@@ -99,8 +99,8 @@
 	                _react2.default.createElement(
 	                    "div",
 	                    null,
-	                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _Home.Home }),
-	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/home", component: _Home.Home }),
+	                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _Search.Search }),
+	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/home", component: _Search.Search }),
 	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/login", component: _login.login }),
 	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/register", component: _register.register }),
 	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/search", component: _Search.Search })
@@ -26340,6 +26340,8 @@
 	
 	var _main = __webpack_require__(/*! ./main */ 226);
 	
+	var _reactRouterDom = __webpack_require__(/*! react-router-dom */ 211);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26354,12 +26356,24 @@
 	    function Home() {
 	        _classCallCheck(this, Home);
 	
-	        return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
+	
+	        _this.state = {
+	            contToSearch: ""
+	        };
+	        return _this;
 	    }
 	
 	    _createClass(Home, [{
+	        key: "contSearch",
+	        value: function contSearch() {
+	            this.props.history.push('/search');
+	        }
+	    }, {
 	        key: "render",
 	        value: function render() {
+	            var _this2 = this;
+	
 	            return _react2.default.createElement(
 	                _main.Main,
 	                null,
@@ -26370,17 +26384,23 @@
 	                        "div",
 	                        { className: "align text--center", style: { width: '100%' } },
 	                        _react2.default.createElement(
-	                            "form",
-	                            { action: "#", method: "POST", className: "form login", style: { width: '60%' } },
+	                            "div",
+	                            { className: "form login", style: { width: '60%' } },
 	                            _react2.default.createElement(
 	                                "div",
 	                                { className: "form__field" },
-	                                _react2.default.createElement("input", { className: "search form__input", id: "search", type: "text", name: "search", placeholder: "What book are you looking for?", required: true })
+	                                _react2.default.createElement("input", { className: "search form__input", id: "search", type: "text", name: "search", placeholder: "What book are you looking for?", required: true,
+	                                    onChange: function onChange(event) {
+	                                        return _this2.setState({ contToSearch: event.target.value });
+	                                    }
+	                                })
 	                            ),
 	                            _react2.default.createElement(
 	                                "div",
 	                                { className: "form__field" },
-	                                _react2.default.createElement("input", { className: "submittt", type: "submit", name: "submit", value: "Search" })
+	                                _react2.default.createElement("input", { className: "submittt", type: "button", name: "submit", value: "Search", onClick: function onClick() {
+	                                        return _this2.contSearch();
+	                                    } })
 	                            )
 	                        )
 	                    )
@@ -26772,8 +26792,15 @@
 	    }
 	
 	    _createClass(MenuLinks, [{
+	        key: "refreshPage",
+	        value: function refreshPage() {
+	            window.location.reload();
+	        }
+	    }, {
 	        key: "render",
 	        value: function render() {
+	            var _this2 = this;
+	
 	            return _react2.default.createElement(
 	                "div",
 	                null,
@@ -26796,8 +26823,10 @@
 	                                "li",
 	                                null,
 	                                _react2.default.createElement(
-	                                    _reactRouterDom.Link,
-	                                    { to: "/home" },
+	                                    "a",
+	                                    { onClick: function onClick() {
+	                                            return _this2.refreshPage();
+	                                        } },
 	                                    "Home"
 	                                )
 	                            ),
@@ -27512,6 +27541,8 @@
 	
 	var _reactRouterDom = __webpack_require__(/*! react-router-dom */ 211);
 	
+	var _sfcookies = __webpack_require__(/*! sfcookies */ 240);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27530,8 +27561,7 @@
 	
 	        _this.state = {
 	            username: "",
-	            password: "",
-	            books: ""
+	            password: ""
 	        };
 	        return _this;
 	    }
@@ -27539,20 +27569,17 @@
 	    _createClass(login, [{
 	        key: "logIn",
 	        value: function logIn() {
-	            var _this2 = this;
-	
 	            console.log('this.state', this.state);
 	            var _state = this.state,
 	                username = _state.username,
 	                password = _state.password;
 	
-	            fetch("/auth?user=" + username + "&pass=" + password).then(function (res) {
+	            fetch("http://localhost:1337/auth?user=" + username + "&pass=" + password).then(function (res) {
 	                return res.json();
-	            }).then(function (books) {
-	                return _this2.setState({ books: books }, function () {
-	                    return console.log("fetched");
-	                });
 	            });
+	            //window.location.assign("/")
+	            var cookie_key = 'test';
+	            (0, _sfcookies.bake_cookie)(cookie_key, this.state.username);
 	        }
 	    }, {
 	        key: "toggleHelpWindow",
@@ -27568,7 +27595,7 @@
 	    }, {
 	        key: "render",
 	        value: function render() {
-	            var _this3 = this;
+	            var _this2 = this;
 	
 	            var _state2 = this.state,
 	                username = _state2.username,
@@ -27607,7 +27634,7 @@
 	                                _react2.default.createElement("input", { id: "login__username", type: "text", name: "username", className: "form__input",
 	                                    placeholder: "Username", required: true,
 	                                    onChange: function onChange(event) {
-	                                        return _this3.setState({ username: event.target.value });
+	                                        return _this2.setState({ username: event.target.value });
 	                                    } })
 	                            ),
 	                            _react2.default.createElement(
@@ -27626,14 +27653,14 @@
 	                                _react2.default.createElement("input", { id: "login__password", type: "password", name: "password", className: "form__input",
 	                                    placeholder: "Password", required: true,
 	                                    onChange: function onChange(event) {
-	                                        return _this3.setState({ password: event.target.value });
+	                                        return _this2.setState({ password: event.target.value });
 	                                    } })
 	                            ),
 	                            _react2.default.createElement(
 	                                "div",
 	                                { className: "form__field" },
 	                                _react2.default.createElement("input", { type: "button", name: "submit", value: "Sign In", onClick: function onClick() {
-	                                        return _this3.logIn();
+	                                        return _this2.logIn();
 	                                    } })
 	                            )
 	                        ),
@@ -27660,7 +27687,7 @@
 	                    _react2.default.createElement("img", { className: "chat-icon", src: "../../img/scroll.gif", width: "80px", height: "120px", style: { marginRight: '200px', bottom: '38px', border: 'none', boxShadow: 'none', borderRadius: '0px', transform: 'rotate(270deg)' } }),
 	                    _react2.default.createElement("img", { className: "chat-icon", src: "../../img/scroll.gif", width: "80px", height: "120px", style: { marginRight: '200px', bottom: '38px', border: 'none', boxShadow: 'none', borderRadius: '0px', transform: 'rotate(270deg)' } }),
 	                    _react2.default.createElement("img", { className: "chat-icon", src: "../../img/help.png", width: "80px", height: "80px", onClick: function onClick() {
-	                            return _this3.toggleHelpWindow();
+	                            return _this2.toggleHelpWindow();
 	                        } })
 	                )
 	            );
@@ -27812,6 +27839,37 @@
 
 /***/ }),
 /* 240 */
+/*!******************************!*\
+  !*** ./~/sfcookies/index.js ***!
+  \******************************/
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.bake_cookie = bake_cookie;
+	exports.read_cookie = read_cookie;
+	exports.delete_cookie = delete_cookie;
+	function bake_cookie(name, value) {
+	  var cookie = [name, '=', JSON.stringify(value), '; domain_.', window.location.host.toString(), '; path=/;'].join('');
+	  document.cookie = cookie;
+	}
+	
+	// reads a cookie according to the given name
+	function read_cookie(name) {
+	  var result = document.cookie.match(new RegExp(name + '=([^;]+)'));
+	  result = result != null ? JSON.parse(result[1]) : [];
+	  return result;
+	}
+	
+	function delete_cookie(name) {
+	  document.cookie = [name, '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain.', window.location.host.toString()].join('');
+	}
+
+/***/ }),
+/* 241 */
 /*!****************************************!*\
   !*** ./src/app/components/register.js ***!
   \****************************************/
@@ -27959,7 +28017,7 @@
 	}(_react2.default.Component);
 
 /***/ }),
-/* 241 */
+/* 242 */
 /*!**************************************!*\
   !*** ./src/app/components/Search.js ***!
   \**************************************/
@@ -28002,25 +28060,45 @@
 	
 	        _this.state = {
 	            toSearch: "",
+	            height: true,
+	            match: false,
 	            found: []
 	        };
 	        return _this;
 	    }
 	
 	    _createClass(Search, [{
+	        key: "changeHeight",
+	        value: function changeHeight() {
+	            if (this.state.match) {
+	                this.setState({ height: false });
+	            } else if (!this.state.match) {
+	                this.setState({ height: true });
+	            }
+	        }
+	    }, {
+	        key: "update",
+	        value: function update(event) {
+	            this.setState({ toSearch: event.target.value });
+	            this.setState({ match: true });
+	            console.log('bool', this.state.match);
+	        }
+	    }, {
 	        key: "goSearch",
 	        value: function goSearch() {
 	            var _this2 = this;
 	
+	            this.changeHeight();
 	            var _state = this.state,
 	                word = _state.word,
+	                height = _state.height,
 	                found = _state.found;
 	
 	            fetch("http://localhost:1337/find?keyword=" + this.state.toSearch).then(function (res) {
 	                return res.json();
 	            }).then(function (results) {
-	                return _this2.setState({ found: found }, function () {
-	                    return console.log("fetched", results);
+	                return _this2.setState({ found: results }, function () {
+	                    return console.log("fetched", found);
 	                });
 	            });
 	        }
@@ -28029,6 +28107,7 @@
 	        value: function render() {
 	            var _this3 = this;
 	
+	            var inHeight = this.state.height ? "50%" : "110px";
 	            return _react2.default.createElement(
 	                _main.Main,
 	                null,
@@ -28037,13 +28116,13 @@
 	                    { style: { width: '100%' } },
 	                    _react2.default.createElement(
 	                        "div",
-	                        { className: "align text--center", style: { width: '100%', top: '80px' } },
+	                        { className: "align text--center", style: { zIndex: 999, width: '100%', top: inHeight } },
 	                        _react2.default.createElement(
 	                            "div",
 	                            { className: "form__field center-x", style: { whiteSpace: 'nowrap' } },
 	                            _react2.default.createElement("input", { className: "search form__input", id: "search", type: "text", style: { color: 'white', marginRight: '8px' }, name: "search", placeholder: "What book are you looking for?", required: true,
 	                                onChange: function onChange(event) {
-	                                    return _this3.setState({ toSearch: event.target.value });
+	                                    _this3.update(event);
 	                                }
 	                            }),
 	                            _react2.default.createElement("input", { className: "submittt", name: "submit", type: "button", value: "Search",
@@ -28057,22 +28136,83 @@
 	                _react2.default.createElement(
 	                    "div",
 	                    { style: { textAlign: 'center', marginTop: '110px' } },
-	                    _react2.default.createElement(
-	                        "h1",
-	                        null,
-	                        "Results"
-	                    ),
-	                    _react2.default.createElement(
-	                        "ul",
-	                        null,
-	                        this.state.found.map(function (books) {
-	                            return _react2.default.createElement(
-	                                "li",
-	                                { key: books.id },
-	                                books.title
-	                            );
-	                        })
-	                    )
+	                    this.state.found.map(function (books) {
+	                        return _react2.default.createElement(
+	                            "div",
+	                            null,
+	                            _react2.default.createElement(
+	                                "table",
+	                                { className: "center-x", style: { width: 800, color: 'white', borderColor: '#2c3338', position: 'relative' } },
+	                                _react2.default.createElement(
+	                                    "tbody",
+	                                    null,
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "th",
+	                                            null,
+	                                            " "
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            { style: { width: 150, height: 170 }, rowSpan: "4" },
+	                                            _react2.default.createElement("img", { src: books.picLoc, style: { width: 150, height: 170 } })
+	                                        ),
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            null,
+	                                            "Title: ",
+	                                            books.title
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            null,
+	                                            " Author: ",
+	                                            books.author
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            null,
+	                                            " Description: ",
+	                                            books.description
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            { style: { textAlign: 'center' }, height: "70px" },
+	                                            _react2.default.createElement("input", { className: "submittt", style: { display: 'inline' }, type: "button", name: books.bookLoc, value: "DOWNLOAD" }),
+	                                            _react2.default.createElement(
+	                                                "p",
+	                                                { style: { display: 'none' } },
+	                                                "Must be signed in to download"
+	                                            )
+	                                        )
+	                                    )
+	                                )
+	                            ),
+	                            _react2.default.createElement("br", null),
+	                            _react2.default.createElement("br", null),
+	                            _react2.default.createElement("hr", { style: { width: '79%', borderColor: 'rgb(37, 42, 45)' } }),
+	                            _react2.default.createElement("br", null),
+	                            _react2.default.createElement("br", null)
+	                        );
+	                    })
 	                )
 	            );
 	        }

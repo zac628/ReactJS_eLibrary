@@ -87,7 +87,37 @@ app.get('/all', function(req, res, next) {
 });
 
 app.get('/add', function(req, res) {
+    const {pic, title, author, des, loc} = req.query;
+    const ADD_BOOK = `INSERT INTO books (title, author, description, picLoc, bookLoc) VALUES ('${title}', '${author}', '${des}', '${pic}', '${loc}');`;
+    connection.query(ADD_BOOK, function(error, results, next){
 
+        if(!!error){
+            console.log(error);
+            res.send('Something went wrong');
+        }else{
+
+            console.log('book add success');
+            res.send('book added');
+        }
+
+    })
+});
+
+app.get('/del', function (req, res) {
+   const{id} = req.query;
+   const DEL_BOOK = `DELETE FROM books WHERE bookid='${id}';`;
+    connection.query(DEL_BOOK, function(error, results, next){
+
+        if(!!error){
+            console.log(error);
+            res.send('Something went wrong');
+        }else{
+
+            console.log('book DELETE success');
+            res.send('book deleted');
+        }
+
+    })
 });
 
 app.get('/auth', function(req, res, next){

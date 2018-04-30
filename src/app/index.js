@@ -9,6 +9,7 @@ import { register } from "./components/register";
 import { Search } from "./components/Search";
 import { add } from "./components/addBook";
 import { getAll } from "./components/allBooks";
+import { del } from "./components/delBook";
 import { Main } from "./components/main";
 
 
@@ -24,6 +25,7 @@ class App extends React.Component{
                     <Route path="/search" component={Search}/>
                     <Route path="/allbooks" component={getAll}/>
                     <Route path="/addbook" component={add}/>
+                    <Route path="/deletebook" component={del}/>
                 </div>
             </Router>
         );

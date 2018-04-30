@@ -16,7 +16,9 @@ export class add extends React.Component{
     }
 
     goAdd(){
-        fetch(`http://localhost:1337/find?keyword=${this.state.toSearch}`);
+        fetch(`http://localhost:1337/add?pic=${this.state.pic}&title=${this.state.title}&author=${this.state.author}&des=${this.state.des}&loc=${this.state.loc}`);
+        alert("Book has been added!");
+        window.location.reload();
     }
     render(){
 
@@ -28,40 +30,40 @@ export class add extends React.Component{
 
                         <div className="grid" >
 
-                            <form action="#" method="POST" className="form login">
+                            <div className="form login">
 
                                 <div className="form__field">
                                     <input type="text" name="pic" className="form__input"
-                                           placeholder="URL of book Cover" required />
+                                           placeholder="URL of book Cover" required onChange={event => this.setState({pic:event.target.value})} />
                                 </div>
 
                                 <div className="form__field">
-                                    <input type="text" name="title" className="form__input" placeholder="Title"
+                                    <input type="text" name="title" className="form__input" placeholder="Title" onChange={event => this.setState({title:event.target.value})}
                                            required />
                                 </div>
 
 
                                 <div className="form__field">
-                                    <input type="text" name="author" className="form__input" placeholder="Author"
+                                    <input type="text" name="author" className="form__input" placeholder="Author" onChange={event => this.setState({author:event.target.value})}
                                            required />
                                 </div>
 
                                 <div className="form__field" style={{width: '60%'}}>
-                                    <input type="text-area" name="description" style={{minWidth: '20rem'}} className="desc"
+                                    <input type="text-area" name="description" style={{minWidth: '20rem'}} className="desc" onChange={event => this.setState({des:event.target.value})}
                                               placeholder="Description" required />
                                 </div>
 
                                 <div className="form__field">
-                                    <input type="text" name="book" className="form__input" placeholder="URL of book PDF"
+                                    <input type="text" name="book" className="form__input" placeholder="URL of book PDF" onChange={event => this.setState({loc:event.target.value})}
                                            required />
                                 </div>
 
 
                                 <div className="form__field">
-                                    <input type="submit" name='submit' value="Add Book" enctype="multipart/form-data" />
+                                    <input type="button" name='submit' value="Add Book"  onClick={() => this.goAdd()} />
                                 </div>
 
-                            </form>
+                            </div>
 
 
                         </div>

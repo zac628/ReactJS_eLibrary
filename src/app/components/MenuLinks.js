@@ -34,7 +34,7 @@ class MenuLinks extends React.Component {
     adminTools(){
         const lvl = read_cookie(this.cookie_key3);
         if(lvl == 2){
-            return <li><Link to={"/addBook"}>Add Book</Link></li>;
+            return <div><li><Link to={"/deletebook"}>Delete Book</Link></li><li><Link to={"/addBook"}>Add Book</Link></li></div>;
         }
     }
 homePage(){

@@ -65,11 +65,17 @@
 	
 	var _Home = __webpack_require__(/*! ./components/Home */ 225);
 	
-	var _login = __webpack_require__(/*! ./components/login */ 235);
+	var _login = __webpack_require__(/*! ./components/login */ 236);
 	
 	var _register = __webpack_require__(/*! ./components/register */ 241);
 	
 	var _Search = __webpack_require__(/*! ./components/Search */ 242);
+	
+	var _addBook = __webpack_require__(/*! ./components/addBook */ 243);
+	
+	var _allBooks = __webpack_require__(/*! ./components/allBooks */ 244);
+	
+	var _delBook = __webpack_require__(/*! ./components/delBook */ 245);
 	
 	var _main = __webpack_require__(/*! ./components/main */ 226);
 	
@@ -103,7 +109,10 @@
 	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/home", component: _Search.Search }),
 	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/login", component: _login.login }),
 	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/register", component: _register.register }),
-	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/search", component: _Search.Search })
+	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/search", component: _Search.Search }),
+	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/allbooks", component: _allBooks.getAll }),
+	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/addbook", component: _addBook.add }),
+	                    _react2.default.createElement(_reactRouterDom.Route, { path: "/deletebook", component: _delBook.del })
 	                )
 	            );
 	        }
@@ -26522,6 +26531,8 @@
 	
 	var _reactRouterDom = __webpack_require__(/*! react-router-dom */ 211);
 	
+	var _sfcookies = __webpack_require__(/*! sfcookies */ 235);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26536,17 +26547,76 @@
 	    function Header() {
 	        _classCallCheck(this, Header);
 	
-	        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this));
+	
+	        _this.cookie_key1 = 'eLibUser';
+	        _this.cookie_key2 = 'eLibName';
+	        _this.cookie_key3 = 'eLibLvl';
+	
+	        return _this;
 	    }
 	
 	    _createClass(Header, [{
-	        key: "onNavSignIn",
-	        value: function onNavSignIn() {
-	            this.props.history.push("/login");
+	        key: "loggedIn",
+	        value: function loggedIn() {
+	            var _this2 = this;
+	
+	            var user = (0, _sfcookies.read_cookie)(this.cookie_key1);
+	            var name = (0, _sfcookies.read_cookie)(this.cookie_key2);
+	            var lvl = (0, _sfcookies.read_cookie)(this.cookie_key3);
+	            if (user == '') {
+	                return _react2.default.createElement(
+	                    _reactRouterDom.Link,
+	                    { className: "submittt", to: "/login", style: { border: 'none', boxShadow: 'none' } },
+	                    "Sign In"
+	                );
+	            } else {
+	                return _react2.default.createElement(
+	                    "a",
+	                    { className: "submittt", style: { border: 'none', boxShadow: 'none' }, onClick: function onClick() {
+	                            return _this2.logOut();
+	                        } },
+	                    "Sign Out"
+	                );
+	            }
+	        }
+	    }, {
+	        key: "logOut",
+	        value: function logOut() {
+	            (0, _sfcookies.delete_cookie)(this.cookie_key1);
+	            (0, _sfcookies.delete_cookie)(this.cookie_key2);
+	            (0, _sfcookies.delete_cookie)(this.cookie_key3);
+	            document.location.replace('/login');
+	        }
+	    }, {
+	        key: "showName",
+	        value: function showName() {
+	            var user = (0, _sfcookies.read_cookie)(this.cookie_key1);
+	            var name = (0, _sfcookies.read_cookie)(this.cookie_key2);
+	            var lvl = (0, _sfcookies.read_cookie)(this.cookie_key3);
+	            if (user == '') {
+	                return _react2.default.createElement(
+	                    "div",
+	                    { className: "text--center center-x", style: { top: '0px', fontSize: '2em', paddingTop: '30px', position: 'absolute' } },
+	                    "Hello, Guest"
+	                );
+	            } else {
+	                return _react2.default.createElement(
+	                    "div",
+	                    { className: "text--center center-x", style: { top: '0px', fontSize: '2em', paddingTop: '30px', position: 'absolute' } },
+	                    "Hello, ",
+	                    name
+	                );
+	            }
 	        }
 	    }, {
 	        key: "render",
 	        value: function render() {
+	
+	            var user = (0, _sfcookies.read_cookie)(this.cookie_key1);
+	            var name = (0, _sfcookies.read_cookie)(this.cookie_key2);
+	            var lvl = (0, _sfcookies.read_cookie)(this.cookie_key3);
+	
 	            return _react2.default.createElement(
 	                "div",
 	                null,
@@ -26561,17 +26631,9 @@
 	                    _react2.default.createElement(
 	                        "div",
 	                        { className: "fl-rt ", style: { padding: '10px', top: 0 } },
-	                        _react2.default.createElement(
-	                            _reactRouterDom.Link,
-	                            { className: "submittt", to: "/login", style: { border: 'none', boxShadow: 'none' } },
-	                            "Sign In"
-	                        )
+	                        this.loggedIn()
 	                    ),
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "text--center center-x", style: { top: '0px', fontSize: '2em', paddingTop: '30px', position: 'absolute' } },
-	                        "Hey, User"
-	                    )
+	                    this.showName()
 	                ),
 	                _react2.default.createElement(
 	                    "div",
@@ -26774,6 +26836,8 @@
 	
 	var _reactRouterDom = __webpack_require__(/*! react-router-dom */ 211);
 	
+	var _sfcookies = __webpack_require__(/*! sfcookies */ 235);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26788,13 +26852,86 @@
 	    function MenuLinks() {
 	        _classCallCheck(this, MenuLinks);
 	
-	        return _possibleConstructorReturn(this, (MenuLinks.__proto__ || Object.getPrototypeOf(MenuLinks)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (MenuLinks.__proto__ || Object.getPrototypeOf(MenuLinks)).call(this));
+	
+	        _this.cookie_key1 = 'eLibUser';
+	        _this.cookie_key2 = 'eLibName';
+	        _this.cookie_key3 = 'eLibLvl';
+	
+	        return _this;
 	    }
 	
 	    _createClass(MenuLinks, [{
-	        key: "refreshPage",
-	        value: function refreshPage() {
-	            window.location.reload();
+	        key: "loggedIn",
+	        value: function loggedIn() {
+	            var user = (0, _sfcookies.read_cookie)(this.cookie_key1);
+	            var name = (0, _sfcookies.read_cookie)(this.cookie_key2);
+	            var lvl = (0, _sfcookies.read_cookie)(this.cookie_key3);
+	            if (user == '') {
+	                return _react2.default.createElement(
+	                    "li",
+	                    null,
+	                    "Hi there guest. This menu has more items but you must be logged in to access them."
+	                );
+	            } else {
+	                return _react2.default.createElement(
+	                    "div",
+	                    null,
+	                    _react2.default.createElement(
+	                        "li",
+	                        null,
+	                        _react2.default.createElement(
+	                            _reactRouterDom.Link,
+	                            { to: "/home" },
+	                            "Your Account"
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "li",
+	                        null,
+	                        _react2.default.createElement(
+	                            _reactRouterDom.Link,
+	                            { to: "/home" },
+	                            "Previous Downloads"
+	                        )
+	                    )
+	                );
+	            }
+	        }
+	    }, {
+	        key: "adminTools",
+	        value: function adminTools() {
+	            var lvl = (0, _sfcookies.read_cookie)(this.cookie_key3);
+	            if (lvl == 2) {
+	                return _react2.default.createElement(
+	                    "div",
+	                    null,
+	                    _react2.default.createElement(
+	                        "li",
+	                        null,
+	                        _react2.default.createElement(
+	                            _reactRouterDom.Link,
+	                            { to: "/deletebook" },
+	                            "Delete Book"
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "li",
+	                        null,
+	                        _react2.default.createElement(
+	                            _reactRouterDom.Link,
+	                            { to: "/addBook" },
+	                            "Add Book"
+	                        )
+	                    )
+	                );
+	            }
+	        }
+	    }, {
+	        key: "homePage",
+	        value: function homePage() {
+	            window.location.replace('/');
+	            // window.location.reload();
 	        }
 	    }, {
 	        key: "render",
@@ -26825,7 +26962,7 @@
 	                                _react2.default.createElement(
 	                                    "a",
 	                                    { onClick: function onClick() {
-	                                            return _this2.refreshPage();
+	                                            return _this2.homePage();
 	                                        } },
 	                                    "Home"
 	                                )
@@ -26835,28 +26972,12 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _reactRouterDom.Link,
-	                                    { to: "/home" },
-	                                    "Your Account"
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                "li",
-	                                null,
-	                                _react2.default.createElement(
-	                                    _reactRouterDom.Link,
-	                                    { to: "/home" },
-	                                    "Previous Downloads"
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                "li",
-	                                null,
-	                                _react2.default.createElement(
-	                                    _reactRouterDom.Link,
-	                                    { to: "/home" },
+	                                    { to: "/allbooks" },
 	                                    "All Books"
 	                                )
-	                            )
+	                            ),
+	                            this.loggedIn(),
+	                            this.adminTools()
 	                        )
 	                    )
 	                )
@@ -26934,7 +27055,7 @@
 	
 	
 	// module
-	exports.push([module.id, "html {\n  font-size: 10px; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  color: #22313a;\n  background-color: #ffffff;\n  font-family: 'Helvetica Neue', sans-serif; }\n\na {\n  text-decoration: none; }\n\nul {\n  list-style: none; }\n\n/* Sidebar Styles */\n.page-wrap {\n  display: block;\n  position: relative;\n  width: 100%; }\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: calc(98% - 6vh);\n    display: block;\n    height: 7vh;\n    width: 7vh;\n    line-height: 7vh;\n    margin-top: 0.5vh;\n    background-color: #d95887;\n    color: #ffffff;\n    text-align: center;\n    font-size: 7vh;\n    z-index: 10;\n    cursor: pointer;\n    webkit-transition: all 0.3s ease-in-out;\n    -moz-transition: all 0.3s ease-in-out;\n    -o-transition: all 0.3s ease-in-out;\n    transition: all 0.3s ease-in-out; }\n\n.content {\n  position: relative;\n  width: 100%;\n  margin-top: 15vh;\n  text-align: center;\n  font-size: 1.5rem;\n  webkit-transition: all 0.3s ease-in-out;\n  -moz-transition: all 0.3s ease-in-out;\n  -o-transition: all 0.3s ease-in-out;\n  transition: all 0.3s ease-in-out; }\n\n.navbar {\n  display: flex;\n  justify-content: space-around;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  height: 8vh;\n  left: -100%;\n  width: 100%;\n  transform: translateX(-100%);\n  background-color: #252a2d;\n  color: #ffffff;\n  text-align: center;\n  z-index: 10;\n  webkit-transition: all 0.3s ease-in-out;\n  -moz-transition: all 0.3s ease-in-out;\n  -o-transition: all 0.3s ease-in-out;\n  transition: all 0.3s ease-in-out; }\n  .navbar .navbar-logo, .navbar ul.navbar-social {\n    position: absolute;\n    top: 0;\n    height: 8vh;\n    line-height: 8vh; }\n  .navbar .navbar-logo {\n    left: 2%; }\n    .navbar .navbar-logo h2 {\n      display: inline; }\n  .navbar ul.navbar-social {\n    display: flex;\n    justify-content: space-between;\n    width: 30%;\n    margin: 0;\n    padding: 0;\n    background-color: #252a2d;\n    z-index: 100; }\n    .navbar ul.navbar-social li {\n      margin-top: 1vh;\n      float: left; }\n      .navbar ul.navbar-social li a {\n        color: #ffffff;\n        text-decoration: none; }\n        .navbar ul.navbar-social li a:hover i {\n          color: #d95887; }\n        .navbar ul.navbar-social li a i {\n          font-size: 2rem;\n          webkit-transition: all 0.3s ease-in-out;\n          -moz-transition: all 0.3s ease-in-out;\n          -o-transition: all 0.3s ease-in-out;\n          transition: all 0.3s ease-in-out; }\n  .navbar ul.navbar-menu {\n    position: absolute;\n    bottom: 1vh;\n    width: 30%;\n    margin: 0;\n    text-transform: uppercase;\n    font-size: 1.5rem; }\n    .navbar ul.navbar-menu li {\n      margin: 1rem 0; }\n      .navbar ul.navbar-menu li:last-child {\n        margin-bottom: 0; }\n      .navbar ul.navbar-menu li a {\n        color: #ffffff;\n        webkit-transition: all 0.3s ease-in-out;\n        -moz-transition: all 0.3s ease-in-out;\n        -o-transition: all 0.3s ease-in-out;\n        transition: all 0.3s ease-in-out; }\n        .navbar ul.navbar-menu li a:hover {\n          color: #d95887; }\n\n#navbar-toggle {\n  display: none; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 24vh; }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(16vh); }\n\n@media (max-width: 700px) {\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 7vh;\n    line-height: 7vh;\n    width: 7vh;\n    margin-top: 0.5vh;\n    z-index: 100; }\n  .navbar {\n    height: 12vh; }\n    .navbar .navbar-logo, .navbar .navbar-social {\n      height: 12vh;\n      line-height: 12vh; }\n    .navbar .navbar-logo {\n      height: 3vh; }\n      .navbar .navbar-logo h2 {\n        font-size: 2rem; }\n    .navbar ul.navbar-social {\n      height: 12vh; }\n      .navbar ul.navbar-social li {\n        margin-top: 3vh; }\n        .navbar ul.navbar-social li a i {\n          font-size: 2.5rem; }\n    .navbar ul.navbar-menu {\n      bottom: 3vh;\n      width: 30%;\n      font-size: 1.8rem; }\n      .navbar ul.navbar-menu li {\n        margin: 2rem 0; }\n        .navbar ul.navbar-menu li a {\n          color: #ffffff; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 48vh;\n    left: 100%; }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(36vh); } }\n\n@media (min-width: 700px) {\n  .content {\n    width: 75%;\n    margin-left: 25%;\n    margin-top: 0; }\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 45px;\n    width: 45px;\n    line-height: 40px;\n    margin-top: 0;\n    font-size: 35px; }\n  .navbar {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 100vh;\n    width: 25%; }\n    .navbar .navbar-logo {\n      top: 10%;\n      height: 20%;\n      width: 100%;\n      left: 0; }\n      .navbar .navbar-logo h2 {\n        font-size: 2rem; }\n    .navbar ul.navbar-social {\n      top: 20%;\n      height: 10%;\n      z-index: 0;\n      font-size: 1.5rem; }\n      .navbar ul.navbar-social li {\n        height: 1.5rem;\n        width: 1.5rem; }\n        .navbar ul.navbar-social li a {\n          color: #ffffff;\n          text-decoration: none; }\n          .navbar ul.navbar-social li a i {\n            font-size: 3rem; }\n    .navbar ul.navbar-menu {\n      position: absolute;\n      top: 0;\n      width: 100%;\n      margin: 0;\n      padding: 0;\n      font-size: 1.6rem; }\n      .navbar ul.navbar-menu li {\n        margin: 2rem 0; }\n        .navbar ul.navbar-menu li:last-child {\n          margin-bottom: 0; }\n        .navbar ul.navbar-menu li a {\n          color: #ffffff; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 100vh;\n    transform: translateX(0); }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(0);\n    left: 25%; }\n  #navbar-toggle:checked + .page-wrap .content {\n    width: 100%;\n    margin-left: 0; }\n  ul.navbar-menu li {\n    color: #ffffff; } }\n", ""]);
+	exports.push([module.id, "html {\n  font-size: 10px; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  color: #22313a;\n  background-color: #ffffff;\n  font-family: 'Helvetica Neue', sans-serif;\n  z-index: 99; }\n\na {\n  text-decoration: none; }\n\nul {\n  list-style: none; }\n\n/* Sidebar Styles */\n.page-wrap {\n  display: block;\n  position: relative;\n  width: 100%; }\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: calc(98% - 6vh);\n    display: block;\n    height: 7vh;\n    width: 7vh;\n    line-height: 7vh;\n    margin-top: 0.5vh;\n    background-color: #d95887;\n    color: #ffffff;\n    text-align: center;\n    font-size: 7vh;\n    z-index: 99;\n    cursor: pointer;\n    webkit-transition: all 0.3s ease-in-out;\n    -moz-transition: all 0.3s ease-in-out;\n    -o-transition: all 0.3s ease-in-out;\n    transition: all 0.3s ease-in-out; }\n\n.content {\n  position: relative;\n  width: 100%;\n  margin-top: 15vh;\n  text-align: center;\n  font-size: 1.5rem;\n  webkit-transition: all 0.3s ease-in-out;\n  -moz-transition: all 0.3s ease-in-out;\n  -o-transition: all 0.3s ease-in-out;\n  transition: all 0.3s ease-in-out; }\n\n.navbar {\n  display: flex;\n  justify-content: space-around;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  height: 8vh;\n  left: -100%;\n  width: 100%;\n  transform: translateX(-100%);\n  background-color: #252a2d;\n  color: #ffffff;\n  text-align: center;\n  z-index: 10;\n  webkit-transition: all 0.3s ease-in-out;\n  -moz-transition: all 0.3s ease-in-out;\n  -o-transition: all 0.3s ease-in-out;\n  transition: all 0.3s ease-in-out; }\n  .navbar .navbar-logo, .navbar ul.navbar-social {\n    position: absolute;\n    top: 0;\n    height: 8vh;\n    line-height: 8vh; }\n  .navbar .navbar-logo {\n    left: 2%; }\n    .navbar .navbar-logo h2 {\n      display: inline; }\n  .navbar ul.navbar-social {\n    display: flex;\n    justify-content: space-between;\n    width: 30%;\n    margin: 0;\n    padding: 0;\n    background-color: #252a2d;\n    z-index: 100; }\n    .navbar ul.navbar-social li {\n      margin-top: 1vh;\n      float: left; }\n      .navbar ul.navbar-social li a {\n        color: #ffffff;\n        text-decoration: none; }\n        .navbar ul.navbar-social li a:hover i {\n          color: #d95887; }\n        .navbar ul.navbar-social li a i {\n          font-size: 2rem;\n          webkit-transition: all 0.3s ease-in-out;\n          -moz-transition: all 0.3s ease-in-out;\n          -o-transition: all 0.3s ease-in-out;\n          transition: all 0.3s ease-in-out; }\n  .navbar ul.navbar-menu {\n    position: absolute;\n    bottom: 1vh;\n    width: 30%;\n    margin: 0;\n    text-transform: uppercase;\n    font-size: 1.5rem; }\n    .navbar ul.navbar-menu li {\n      margin: 1rem 0; }\n      .navbar ul.navbar-menu li:last-child {\n        margin-bottom: 0; }\n      .navbar ul.navbar-menu li a {\n        color: #ffffff;\n        webkit-transition: all 0.3s ease-in-out;\n        -moz-transition: all 0.3s ease-in-out;\n        -o-transition: all 0.3s ease-in-out;\n        transition: all 0.3s ease-in-out; }\n        .navbar ul.navbar-menu li a:hover {\n          color: #d95887; }\n\n#navbar-toggle {\n  display: none; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 24vh; }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(16vh); }\n\n@media (max-width: 700px) {\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 7vh;\n    line-height: 7vh;\n    width: 7vh;\n    margin-top: 0.5vh;\n    z-index: 100; }\n  .navbar {\n    height: 12vh; }\n    .navbar .navbar-logo, .navbar .navbar-social {\n      height: 12vh;\n      line-height: 12vh; }\n    .navbar .navbar-logo {\n      height: 3vh; }\n      .navbar .navbar-logo h2 {\n        font-size: 2rem; }\n    .navbar ul.navbar-social {\n      height: 12vh; }\n      .navbar ul.navbar-social li {\n        margin-top: 3vh; }\n        .navbar ul.navbar-social li a i {\n          font-size: 2.5rem; }\n    .navbar ul.navbar-menu {\n      bottom: 3vh;\n      width: 30%;\n      font-size: 1.8rem; }\n      .navbar ul.navbar-menu li {\n        margin: 2rem 0; }\n        .navbar ul.navbar-menu li a {\n          color: #ffffff; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 48vh;\n    left: 100%; }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(36vh); } }\n\n@media (min-width: 700px) {\n  .content {\n    width: 75%;\n    margin-left: 25%;\n    margin-top: 0; }\n  .page-wrap .toggle-button {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 45px;\n    width: 45px;\n    line-height: 40px;\n    margin-top: 0;\n    font-size: 35px; }\n  .navbar {\n    position: fixed;\n    top: 0;\n    left: 0;\n    height: 100vh;\n    width: 25%; }\n    .navbar .navbar-logo {\n      top: 10%;\n      height: 20%;\n      width: 100%;\n      left: 0; }\n      .navbar .navbar-logo h2 {\n        font-size: 2rem; }\n    .navbar ul.navbar-social {\n      top: 20%;\n      height: 10%;\n      z-index: 0;\n      font-size: 1.5rem; }\n      .navbar ul.navbar-social li {\n        height: 1.5rem;\n        width: 1.5rem; }\n        .navbar ul.navbar-social li a {\n          color: #ffffff;\n          text-decoration: none; }\n          .navbar ul.navbar-social li a i {\n            font-size: 3rem; }\n    .navbar ul.navbar-menu {\n      position: absolute;\n      top: 0;\n      width: 100%;\n      margin: 0;\n      padding: 0;\n      font-size: 1.6rem; }\n      .navbar ul.navbar-menu li {\n        margin: 2rem 0; }\n        .navbar ul.navbar-menu li:last-child {\n          margin-bottom: 0; }\n        .navbar ul.navbar-menu li a {\n          color: #ffffff; }\n  #navbar-toggle:checked + .page-wrap div.navbar {\n    height: 100vh;\n    transform: translateX(0); }\n  #navbar-toggle:checked + .page-wrap .toggle-button {\n    transform: translateY(0);\n    left: 25%; }\n  #navbar-toggle:checked + .page-wrap .content {\n    width: 100%;\n    margin-left: 0; }\n  ul.navbar-menu li {\n    color: #ffffff; } }\n", ""]);
 	
 	// exports
 
@@ -27513,6 +27634,37 @@
 
 /***/ }),
 /* 235 */
+/*!******************************!*\
+  !*** ./~/sfcookies/index.js ***!
+  \******************************/
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.bake_cookie = bake_cookie;
+	exports.read_cookie = read_cookie;
+	exports.delete_cookie = delete_cookie;
+	function bake_cookie(name, value) {
+	  var cookie = [name, '=', JSON.stringify(value), '; domain_.', window.location.host.toString(), '; path=/;'].join('');
+	  document.cookie = cookie;
+	}
+	
+	// reads a cookie according to the given name
+	function read_cookie(name) {
+	  var result = document.cookie.match(new RegExp(name + '=([^;]+)'));
+	  result = result != null ? JSON.parse(result[1]) : [];
+	  return result;
+	}
+	
+	function delete_cookie(name) {
+	  document.cookie = [name, '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain.', window.location.host.toString()].join('');
+	}
+
+/***/ }),
+/* 236 */
 /*!*************************************!*\
   !*** ./src/app/components/login.js ***!
   \*************************************/
@@ -27535,13 +27687,13 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	__webpack_require__(/*! ../../css/login.css */ 236);
+	__webpack_require__(/*! ../../css/login.css */ 237);
 	
-	__webpack_require__(/*! ../../css/style.css */ 238);
+	__webpack_require__(/*! ../../css/style.css */ 239);
 	
 	var _reactRouterDom = __webpack_require__(/*! react-router-dom */ 211);
 	
-	var _sfcookies = __webpack_require__(/*! sfcookies */ 240);
+	var _sfcookies = __webpack_require__(/*! sfcookies */ 235);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27561,7 +27713,8 @@
 	
 	        _this.state = {
 	            username: "",
-	            password: ""
+	            password: "",
+	            authPass: []
 	        };
 	        return _this;
 	    }
@@ -27569,17 +27722,30 @@
 	    _createClass(login, [{
 	        key: "logIn",
 	        value: function logIn() {
+	            var _this2 = this;
+	
 	            console.log('this.state', this.state);
 	            var _state = this.state,
 	                username = _state.username,
-	                password = _state.password;
+	                password = _state.password,
+	                authPass = _state.authPass;
 	
 	            fetch("http://localhost:1337/auth?user=" + username + "&pass=" + password).then(function (res) {
 	                return res.json();
+	            }).then(function (results) {
+	                return _this2.setState({ authPass: results }, function () {
+	                    if (_this2.state.authPass) {
+	                        var cookie_key1 = 'eLibUser';
+	                        var cookie_key2 = 'eLibName';
+	                        var cookie_key3 = 'eLibLvl';
+	                        (0, _sfcookies.bake_cookie)(cookie_key1, _this2.state.username);
+	                        (0, _sfcookies.bake_cookie)(cookie_key2, _this2.state.authPass[0]);
+	                        (0, _sfcookies.bake_cookie)(cookie_key3, _this2.state.authPass[1]);
+	                        document.location.replace('/home');
+	                    }
+	                });
 	            });
-	            //window.location.assign("/")
-	            var cookie_key = 'test';
-	            (0, _sfcookies.bake_cookie)(cookie_key, this.state.username);
+	            //.then(results => {if(this.state.authPass){document.location.replace('/home')}});
 	        }
 	    }, {
 	        key: "toggleHelpWindow",
@@ -27595,7 +27761,7 @@
 	    }, {
 	        key: "render",
 	        value: function render() {
-	            var _this2 = this;
+	            var _this3 = this;
 	
 	            var _state2 = this.state,
 	                username = _state2.username,
@@ -27634,7 +27800,7 @@
 	                                _react2.default.createElement("input", { id: "login__username", type: "text", name: "username", className: "form__input",
 	                                    placeholder: "Username", required: true,
 	                                    onChange: function onChange(event) {
-	                                        return _this2.setState({ username: event.target.value });
+	                                        return _this3.setState({ username: event.target.value });
 	                                    } })
 	                            ),
 	                            _react2.default.createElement(
@@ -27653,14 +27819,14 @@
 	                                _react2.default.createElement("input", { id: "login__password", type: "password", name: "password", className: "form__input",
 	                                    placeholder: "Password", required: true,
 	                                    onChange: function onChange(event) {
-	                                        return _this2.setState({ password: event.target.value });
+	                                        return _this3.setState({ password: event.target.value });
 	                                    } })
 	                            ),
 	                            _react2.default.createElement(
 	                                "div",
 	                                { className: "form__field" },
 	                                _react2.default.createElement("input", { type: "button", name: "submit", value: "Sign In", onClick: function onClick() {
-	                                        return _this2.logIn();
+	                                        return _this3.logIn();
 	                                    } })
 	                            )
 	                        ),
@@ -27687,7 +27853,7 @@
 	                    _react2.default.createElement("img", { className: "chat-icon", src: "../../img/scroll.gif", width: "80px", height: "120px", style: { marginRight: '200px', bottom: '38px', border: 'none', boxShadow: 'none', borderRadius: '0px', transform: 'rotate(270deg)' } }),
 	                    _react2.default.createElement("img", { className: "chat-icon", src: "../../img/scroll.gif", width: "80px", height: "120px", style: { marginRight: '200px', bottom: '38px', border: 'none', boxShadow: 'none', borderRadius: '0px', transform: 'rotate(270deg)' } }),
 	                    _react2.default.createElement("img", { className: "chat-icon", src: "../../img/help.png", width: "80px", height: "80px", onClick: function onClick() {
-	                            return _this2.toggleHelpWindow();
+	                            return _this3.toggleHelpWindow();
 	                        } })
 	                )
 	            );
@@ -27698,14 +27864,14 @@
 	}(_react2.default.Component);
 
 /***/ }),
-/* 236 */
+/* 237 */
 /*!***************************!*\
   !*** ./src/css/login.css ***!
   \***************************/
 /***/ (function(module, exports, __webpack_require__) {
 
 	
-	var content = __webpack_require__(/*! !../../~/css-loader!./login.css */ 237);
+	var content = __webpack_require__(/*! !../../~/css-loader!./login.css */ 238);
 	
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	
@@ -27751,7 +27917,7 @@
 	}
 
 /***/ }),
-/* 237 */
+/* 238 */
 /*!******************************************!*\
   !*** ./~/css-loader!./src/css/login.css ***!
   \******************************************/
@@ -27768,14 +27934,14 @@
 
 
 /***/ }),
-/* 238 */
+/* 239 */
 /*!***************************!*\
   !*** ./src/css/style.css ***!
   \***************************/
 /***/ (function(module, exports, __webpack_require__) {
 
 	
-	var content = __webpack_require__(/*! !../../~/css-loader!./style.css */ 239);
+	var content = __webpack_require__(/*! !../../~/css-loader!./style.css */ 240);
 	
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	
@@ -27821,7 +27987,7 @@
 	}
 
 /***/ }),
-/* 239 */
+/* 240 */
 /*!******************************************!*\
   !*** ./~/css-loader!./src/css/style.css ***!
   \******************************************/
@@ -27836,37 +28002,6 @@
 	
 	// exports
 
-
-/***/ }),
-/* 240 */
-/*!******************************!*\
-  !*** ./~/sfcookies/index.js ***!
-  \******************************/
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.bake_cookie = bake_cookie;
-	exports.read_cookie = read_cookie;
-	exports.delete_cookie = delete_cookie;
-	function bake_cookie(name, value) {
-	  var cookie = [name, '=', JSON.stringify(value), '; domain_.', window.location.host.toString(), '; path=/;'].join('');
-	  document.cookie = cookie;
-	}
-	
-	// reads a cookie according to the given name
-	function read_cookie(name) {
-	  var result = document.cookie.match(new RegExp(name + '=([^;]+)'));
-	  result = result != null ? JSON.parse(result[1]) : [];
-	  return result;
-	}
-	
-	function delete_cookie(name) {
-	  document.cookie = [name, '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain.', window.location.host.toString()].join('');
-	}
 
 /***/ }),
 /* 241 */
@@ -27894,6 +28029,8 @@
 	
 	var _reactRouterDom = __webpack_require__(/*! react-router-dom */ 211);
 	
+	var _sfcookies = __webpack_require__(/*! sfcookies */ 235);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27915,7 +28052,8 @@
 	        _this.state = {
 	            name: "",
 	            username: "",
-	            password: ""
+	            password: "",
+	            authPass: []
 	        };
 	        return _this;
 	    }
@@ -27923,12 +28061,28 @@
 	    _createClass(register, [{
 	        key: "signUp",
 	        value: function signUp() {
-	            console.log('this.state', this.state);
+	            var _this2 = this;
+	
+	            fetch("http://localhost:1337/signUp?name=" + this.state.name + "&user=" + this.state.username + "&pass=" + this.state.password).then(function (res) {
+	                return res.json();
+	            }).then(function (results) {
+	                return _this2.setState({ authPass: results }, function () {
+	                    if (_this2.state.authPass) {
+	                        var cookie_key1 = 'eLibUser';
+	                        var cookie_key2 = 'eLibName';
+	                        var cookie_key3 = 'eLibLvl';
+	                        (0, _sfcookies.bake_cookie)(cookie_key1, _this2.state.username);
+	                        (0, _sfcookies.bake_cookie)(cookie_key2, _this2.state.authPass[0]);
+	                        (0, _sfcookies.bake_cookie)(cookie_key3, _this2.state.authPass[1]);
+	                        document.location.replace('/home');
+	                    }
+	                });
+	            });
 	        }
 	    }, {
 	        key: "render",
 	        value: function render() {
-	            var _this2 = this;
+	            var _this3 = this;
 	
 	            return _react2.default.createElement(
 	                "div",
@@ -27953,7 +28107,7 @@
 	                            ),
 	                            _react2.default.createElement("input", { id: "name", type: "text", name: "name", className: "form__input", placeholder: "Your Name",
 	                                required: true, onChange: function onChange(event) {
-	                                    return _this2.setState({ name: event.target.value });
+	                                    return _this3.setState({ name: event.target.value });
 	                                } })
 	                        ),
 	                        _react2.default.createElement(
@@ -27970,7 +28124,7 @@
 	                            ),
 	                            _react2.default.createElement("input", { id: "username", type: "text", name: "username", className: "form__input",
 	                                placeholder: "Username", required: true, onChange: function onChange(event) {
-	                                    return _this2.setState({ username: event.target.value });
+	                                    return _this3.setState({ username: event.target.value });
 	                                } })
 	                        ),
 	                        _react2.default.createElement(
@@ -27987,14 +28141,14 @@
 	                            ),
 	                            _react2.default.createElement("input", { id: "password", type: "password", name: "password", className: "form__input",
 	                                placeholder: "Password", required: true, onChange: function onChange(event) {
-	                                    return _this2.setState({ password: event.target.value });
+	                                    return _this3.setState({ password: event.target.value });
 	                                } })
 	                        ),
 	                        _react2.default.createElement(
 	                            "div",
 	                            { className: "form__field" },
 	                            _react2.default.createElement("input", { type: "button", name: "submit", value: "Sign Up & Login", onClick: function onClick() {
-	                                    return _this2.signUp();
+	                                    return _this3.signUp();
 	                                } })
 	                        )
 	                    ),
@@ -28116,7 +28270,7 @@
 	                    { style: { width: '100%' } },
 	                    _react2.default.createElement(
 	                        "div",
-	                        { className: "align text--center", style: { zIndex: 999, width: '100%', top: inHeight } },
+	                        { className: "align text--center", style: { zIndex: 5, width: '100%', top: inHeight } },
 	                        _react2.default.createElement(
 	                            "div",
 	                            { className: "form__field center-x", style: { whiteSpace: 'nowrap' } },
@@ -28125,7 +28279,7 @@
 	                                    _this3.update(event);
 	                                }
 	                            }),
-	                            _react2.default.createElement("input", { className: "submittt", name: "submit", type: "button", value: "Search",
+	                            _react2.default.createElement("input", { className: "submittt", name: "submit", type: "submit", value: "Search",
 	                                onClick: function onClick() {
 	                                    return _this3.goSearch();
 	                                }
@@ -28222,6 +28376,492 @@
 	}(_react2.default.Component);
 	
 	Search.propTypes = {
+	    name: _propTypes2.default.string,
+	    age: _propTypes2.default.number,
+	    user: _propTypes2.default.object
+	};
+
+/***/ }),
+/* 243 */
+/*!***************************************!*\
+  !*** ./src/app/components/addBook.js ***!
+  \***************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.add = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(/*! prop-types */ 187);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _main = __webpack_require__(/*! ./main */ 226);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var add = exports.add = function (_React$Component) {
+	    _inherits(add, _React$Component);
+	
+	    function add() {
+	        _classCallCheck(this, add);
+	
+	        var _this = _possibleConstructorReturn(this, (add.__proto__ || Object.getPrototypeOf(add)).call(this));
+	
+	        _this.state = {
+	            pic: "",
+	            title: '',
+	            author: '',
+	            des: '',
+	            loc: ''
+	        };
+	        return _this;
+	    }
+	
+	    _createClass(add, [{
+	        key: "goAdd",
+	        value: function goAdd() {
+	            fetch("http://localhost:1337/add?pic=" + this.state.pic + "&title=" + this.state.title + "&author=" + this.state.author + "&des=" + this.state.des + "&loc=" + this.state.loc);
+	            alert("Book has been added!");
+	            window.location.reload();
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var _this2 = this;
+	
+	            return _react2.default.createElement(
+	                _main.Main,
+	                null,
+	                _react2.default.createElement(
+	                    "div",
+	                    null,
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "align", style: { width: '100%' } },
+	                        _react2.default.createElement(
+	                            "div",
+	                            { className: "grid" },
+	                            _react2.default.createElement(
+	                                "div",
+	                                { className: "form login" },
+	                                _react2.default.createElement(
+	                                    "div",
+	                                    { className: "form__field" },
+	                                    _react2.default.createElement("input", { type: "text", name: "pic", className: "form__input",
+	                                        placeholder: "URL of book Cover", required: true, onChange: function onChange(event) {
+	                                            return _this2.setState({ pic: event.target.value });
+	                                        } })
+	                                ),
+	                                _react2.default.createElement(
+	                                    "div",
+	                                    { className: "form__field" },
+	                                    _react2.default.createElement("input", { type: "text", name: "title", className: "form__input", placeholder: "Title", onChange: function onChange(event) {
+	                                            return _this2.setState({ title: event.target.value });
+	                                        },
+	                                        required: true })
+	                                ),
+	                                _react2.default.createElement(
+	                                    "div",
+	                                    { className: "form__field" },
+	                                    _react2.default.createElement("input", { type: "text", name: "author", className: "form__input", placeholder: "Author", onChange: function onChange(event) {
+	                                            return _this2.setState({ author: event.target.value });
+	                                        },
+	                                        required: true })
+	                                ),
+	                                _react2.default.createElement(
+	                                    "div",
+	                                    { className: "form__field", style: { width: '60%' } },
+	                                    _react2.default.createElement("input", { type: "text-area", name: "description", style: { minWidth: '20rem' }, className: "desc", onChange: function onChange(event) {
+	                                            return _this2.setState({ des: event.target.value });
+	                                        },
+	                                        placeholder: "Description", required: true })
+	                                ),
+	                                _react2.default.createElement(
+	                                    "div",
+	                                    { className: "form__field" },
+	                                    _react2.default.createElement("input", { type: "text", name: "book", className: "form__input", placeholder: "URL of book PDF", onChange: function onChange(event) {
+	                                            return _this2.setState({ loc: event.target.value });
+	                                        },
+	                                        required: true })
+	                                ),
+	                                _react2.default.createElement(
+	                                    "div",
+	                                    { className: "form__field" },
+	                                    _react2.default.createElement("input", { type: "button", name: "submit", value: "Add Book", onClick: function onClick() {
+	                                            return _this2.goAdd();
+	                                        } })
+	                                )
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return add;
+	}(_react2.default.Component);
+	
+	add.propTypes = {
+	    name: _propTypes2.default.string,
+	    age: _propTypes2.default.number,
+	    user: _propTypes2.default.object
+	};
+
+/***/ }),
+/* 244 */
+/*!****************************************!*\
+  !*** ./src/app/components/allBooks.js ***!
+  \****************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.getAll = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(/*! prop-types */ 187);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _main = __webpack_require__(/*! ./main */ 226);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var getAll = exports.getAll = function (_React$Component) {
+	    _inherits(getAll, _React$Component);
+	
+	    function getAll() {
+	        _classCallCheck(this, getAll);
+	
+	        var _this = _possibleConstructorReturn(this, (getAll.__proto__ || Object.getPrototypeOf(getAll)).call(this));
+	
+	        _this.state = {
+	            found: []
+	        };
+	        return _this;
+	    }
+	
+	    _createClass(getAll, [{
+	        key: "getBooks",
+	        value: function getBooks() {
+	            var _this2 = this;
+	
+	            fetch("http://localhost:1337/all").then(function (res) {
+	                return res.json();
+	            }).then(function (results) {
+	                return _this2.setState({ found: results }, function () {
+	                    return console.log("fetched", _this2.state.found);
+	                });
+	            });
+	        }
+	    }, {
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            this.getBooks();
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                _main.Main,
+	                null,
+	                _react2.default.createElement(
+	                    "div",
+	                    { style: { textAlign: 'center', marginTop: '110px' } },
+	                    this.state.found.map(function (books) {
+	                        return _react2.default.createElement(
+	                            "div",
+	                            null,
+	                            _react2.default.createElement(
+	                                "table",
+	                                { className: "center-x", style: { width: 800, color: 'white', borderColor: '#2c3338', position: 'relative' } },
+	                                _react2.default.createElement(
+	                                    "tbody",
+	                                    null,
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "th",
+	                                            null,
+	                                            " "
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            { style: { width: 150, height: 170 }, rowSpan: "4" },
+	                                            _react2.default.createElement("img", { src: books.picLoc, style: { width: 150, height: 170 } })
+	                                        ),
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            null,
+	                                            "Title: ",
+	                                            books.title
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            null,
+	                                            " Author: ",
+	                                            books.author
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            null,
+	                                            " Description: ",
+	                                            books.description
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            { style: { textAlign: 'center' }, height: "70px" },
+	                                            _react2.default.createElement("input", { className: "submittt", style: { display: 'inline' }, type: "button", name: books.bookLoc, value: "DOWNLOAD" }),
+	                                            _react2.default.createElement(
+	                                                "p",
+	                                                { style: { display: 'none' } },
+	                                                "Must be signed in to download"
+	                                            )
+	                                        )
+	                                    )
+	                                )
+	                            ),
+	                            _react2.default.createElement("br", null),
+	                            _react2.default.createElement("br", null),
+	                            _react2.default.createElement("hr", { style: { width: '79%', borderColor: 'rgb(37, 42, 45)' } }),
+	                            _react2.default.createElement("br", null),
+	                            _react2.default.createElement("br", null)
+	                        );
+	                    })
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return getAll;
+	}(_react2.default.Component);
+	
+	getAll.propTypes = {
+	    name: _propTypes2.default.string,
+	    age: _propTypes2.default.number,
+	    user: _propTypes2.default.object
+	};
+
+/***/ }),
+/* 245 */
+/*!***************************************!*\
+  !*** ./src/app/components/delBook.js ***!
+  \***************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.del = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(/*! prop-types */ 187);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _main = __webpack_require__(/*! ./main */ 226);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var del = exports.del = function (_React$Component) {
+	    _inherits(del, _React$Component);
+	
+	    function del() {
+	        _classCallCheck(this, del);
+	
+	        var _this = _possibleConstructorReturn(this, (del.__proto__ || Object.getPrototypeOf(del)).call(this));
+	
+	        _this.state = {
+	            found: []
+	        };
+	        return _this;
+	    }
+	
+	    _createClass(del, [{
+	        key: "getBooks",
+	        value: function getBooks() {
+	            var _this2 = this;
+	
+	            fetch("http://localhost:1337/all").then(function (res) {
+	                return res.json();
+	            }).then(function (results) {
+	                return _this2.setState({ found: results }, function () {
+	                    return console.log("fetched", _this2.state.found);
+	                });
+	            });
+	        }
+	    }, {
+	        key: "delBook",
+	        value: function delBook(bookID) {
+	            fetch("http://localhost:1337/del?id=" + bookID);
+	            alert("Book has been DELETED!");
+	            window.location.reload();
+	        }
+	    }, {
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            this.getBooks();
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var _this3 = this;
+	
+	            return _react2.default.createElement(
+	                _main.Main,
+	                null,
+	                _react2.default.createElement(
+	                    "div",
+	                    { style: { textAlign: 'center', marginTop: '110px' } },
+	                    this.state.found.map(function (books) {
+	                        return _react2.default.createElement(
+	                            "div",
+	                            null,
+	                            _react2.default.createElement(
+	                                "table",
+	                                { className: "center-x", style: { width: 800, color: 'white', borderColor: '#2c3338', position: 'relative' } },
+	                                _react2.default.createElement(
+	                                    "tbody",
+	                                    null,
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "th",
+	                                            null,
+	                                            " "
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            { style: { width: 150, height: 170 }, rowSpan: "4" },
+	                                            _react2.default.createElement("img", { src: books.picLoc, style: { width: 150, height: 170 } })
+	                                        ),
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            null,
+	                                            "Title: ",
+	                                            books.title
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            null,
+	                                            " Author: ",
+	                                            books.author
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            null,
+	                                            " Description: ",
+	                                            books.description
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        "tr",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "td",
+	                                            { style: { textAlign: 'center' }, height: "70px" },
+	                                            _react2.default.createElement("input", { className: "submittt", style: { display: 'inline' }, type: "button", value: "DELETE", onClick: function onClick() {
+	                                                    return _this3.delBook(books.bookid);
+	                                                } }),
+	                                            _react2.default.createElement(
+	                                                "p",
+	                                                { style: { display: 'none' } },
+	                                                "Must be signed in to download"
+	                                            )
+	                                        )
+	                                    )
+	                                )
+	                            ),
+	                            _react2.default.createElement("br", null),
+	                            _react2.default.createElement("br", null),
+	                            _react2.default.createElement("hr", { style: { width: '79%', borderColor: 'rgb(37, 42, 45)' } }),
+	                            _react2.default.createElement("br", null),
+	                            _react2.default.createElement("br", null)
+	                        );
+	                    })
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return del;
+	}(_react2.default.Component);
+	
+	del.propTypes = {
 	    name: _propTypes2.default.string,
 	    age: _propTypes2.default.number,
 	    user: _propTypes2.default.object

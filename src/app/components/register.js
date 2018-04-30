@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 //const css = require('../../css/menu.scss');
 import {Link} from 'react-router-dom';
-
+import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 
 export class register extends React.Component {
     constructor(props){
@@ -10,12 +10,25 @@ export class register extends React.Component {
         this.state={
             name: "",
             username: "",
-            password: ""
+            password: "",
+            authPass: []
         }
     }
 
     signUp(){
-        console.log('this.state', this.state)
+        fetch(`http://localhost:1337/signUp?name=${this.state.name}&user=${this.state.username}&pass=${this.state.password}`);
+        fetch(`http://localhost:1337/auth?user=${this.state.username}&pass=${this.state.password}`)
+            .then(res => res.json())
+            .then(results => this.setState({authPass:results}, () => {if(this.state.authPass){
+                const cookie_key1 = 'eLibUser';
+                const cookie_key2 = 'eLibName';
+                const cookie_key3 = 'eLibLvl';
+                bake_cookie(cookie_key1, this.state.username);
+                bake_cookie(cookie_key2, this.state.authPass[0]);
+                bake_cookie(cookie_key3, this.state.authPass[1]);
+                document.location.replace('/home');
+            }}));
+
     }
     render(){
         return(

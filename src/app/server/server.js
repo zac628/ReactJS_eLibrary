@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const bodyParser = require('body-parser')
 
 const app = express();
 
@@ -17,6 +18,10 @@ const connection = mysql.createConnection({
 
 app.use(cookieParser());
 app.use(cors());
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: true
+}));
 
 connection.connect(function (error) {
     if(!!error){
@@ -102,6 +107,43 @@ app.get('/add', function(req, res) {
 
     })
 });
+
+app.get('/signUp', function(req, res, next){
+    const {name, user, pass} = req.query;
+    const ADD_USER = `INSERT INTO users (name, username, password) VALUES ('${name}','${user}','${pass}');`;
+    connection.query(ADD_USER, function(error, results){
+        if(!!error){
+            console.log(error);
+            //res.send('Could not add user');
+        }else {
+            //res.send('user added');
+            console.log('user added');
+                    const AUTH_USER = `Select * FROM users WHERE username = '${user}' AND password = '${pass}'`;
+                    connection.query(AUTH_USER, function(error, results){
+                        if(!!error){
+                            console.log(error);
+                            res.send('Something went wrong');
+                        }else{
+                            if(results.length >0) {
+                                console.log('success');
+                                const name = results[0].name;
+                                const lvl = results[0].user_lvl;
+                                //res.redirect('http://localhost:8080/');
+                                return res.json([name, lvl]);
+                                //next();
+
+                            }else{
+                                console.log('Something went wrong');
+                                //res.send('Something went wrong');
+                                return res.json(false);
+                            }
+                        }
+                    });
+        }
+    });
+
+});
+
 
 app.get('/del', function (req, res) {
    const{id} = req.query;

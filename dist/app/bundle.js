@@ -27738,9 +27738,11 @@
 	                        var cookie_key1 = 'eLibUser';
 	                        var cookie_key2 = 'eLibName';
 	                        var cookie_key3 = 'eLibLvl';
+	                        var cookie_key4 = 'eLibID';
 	                        (0, _sfcookies.bake_cookie)(cookie_key1, _this2.state.username);
 	                        (0, _sfcookies.bake_cookie)(cookie_key2, _this2.state.authPass[0]);
 	                        (0, _sfcookies.bake_cookie)(cookie_key3, _this2.state.authPass[1]);
+	                        (0, _sfcookies.bake_cookie)(cookie_key4, _this2.state.authPass[2]);
 	                        document.location.replace('/home');
 	                    }
 	                });
@@ -28063,7 +28065,8 @@
 	        value: function signUp() {
 	            var _this2 = this;
 	
-	            fetch("http://localhost:1337/signUp?name=" + this.state.name + "&user=" + this.state.username + "&pass=" + this.state.password).then(function (res) {
+	            fetch("http://localhost:1337/signUp?name=" + this.state.name + "&user=" + this.state.username + "&pass=" + this.state.password);
+	            fetch("http://localhost:1337/auth?user=" + this.state.username + "&pass=" + this.state.password).then(function (res) {
 	                return res.json();
 	            }).then(function (results) {
 	                return _this2.setState({ authPass: results }, function () {
@@ -28071,9 +28074,11 @@
 	                        var cookie_key1 = 'eLibUser';
 	                        var cookie_key2 = 'eLibName';
 	                        var cookie_key3 = 'eLibLvl';
+	                        var cookie_key4 = 'eLibID';
 	                        (0, _sfcookies.bake_cookie)(cookie_key1, _this2.state.username);
 	                        (0, _sfcookies.bake_cookie)(cookie_key2, _this2.state.authPass[0]);
 	                        (0, _sfcookies.bake_cookie)(cookie_key3, _this2.state.authPass[1]);
+	                        (0, _sfcookies.bake_cookie)(cookie_key4, _this2.state.authPass[2]);
 	                        document.location.replace('/home');
 	                    }
 	                });
@@ -28177,7 +28182,7 @@
   \**************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -28193,6 +28198,8 @@
 	var _propTypes = __webpack_require__(/*! prop-types */ 187);
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _sfcookies = __webpack_require__(/*! sfcookies */ 235);
 	
 	var _main = __webpack_require__(/*! ./main */ 226);
 	
@@ -28212,6 +28219,7 @@
 	
 	        var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this));
 	
+	        _this.cookie_key4 = 'eLibID';
 	        _this.state = {
 	            toSearch: "",
 	            height: true,
@@ -28222,7 +28230,7 @@
 	    }
 	
 	    _createClass(Search, [{
-	        key: "changeHeight",
+	        key: 'changeHeight',
 	        value: function changeHeight() {
 	            if (this.state.match) {
 	                this.setState({ height: false });
@@ -28231,14 +28239,14 @@
 	            }
 	        }
 	    }, {
-	        key: "update",
+	        key: 'update',
 	        value: function update(event) {
 	            this.setState({ toSearch: event.target.value });
 	            this.setState({ match: true });
 	            console.log('bool', this.state.match);
 	        }
 	    }, {
-	        key: "goSearch",
+	        key: 'goSearch',
 	        value: function goSearch() {
 	            var _this2 = this;
 	
@@ -28248,7 +28256,7 @@
 	                height = _state.height,
 	                found = _state.found;
 	
-	            fetch("http://localhost:1337/find?keyword=" + this.state.toSearch).then(function (res) {
+	            fetch('http://localhost:1337/find?keyword=' + this.state.toSearch).then(function (res) {
 	                return res.json();
 	            }).then(function (results) {
 	                return _this2.setState({ found: results }, function () {
@@ -28257,7 +28265,14 @@
 	            });
 	        }
 	    }, {
-	        key: "render",
+	        key: 'addPrev',
+	        value: function addPrev(id) {
+	            var userid = (0, _sfcookies.read_cookie)(this.cookie_key4);
+	            fetch('http://localhost:1337/fav?id=' + id + '&user=' + userid);
+	            //alert("Book has been added!");
+	        }
+	    }, {
+	        key: 'render',
 	        value: function render() {
 	            var _this3 = this;
 	
@@ -28266,20 +28281,20 @@
 	                _main.Main,
 	                null,
 	                _react2.default.createElement(
-	                    "div",
+	                    'div',
 	                    { style: { width: '100%' } },
 	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "align text--center", style: { zIndex: 5, width: '100%', top: inHeight } },
+	                        'div',
+	                        { className: 'align text--center', style: { zIndex: 5, width: '100%', top: inHeight } },
 	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "form__field center-x", style: { whiteSpace: 'nowrap' } },
-	                            _react2.default.createElement("input", { className: "search form__input", id: "search", type: "text", style: { color: 'white', marginRight: '8px' }, name: "search", placeholder: "What book are you looking for?", required: true,
+	                            'div',
+	                            { className: 'form__field center-x', style: { whiteSpace: 'nowrap' } },
+	                            _react2.default.createElement('input', { className: 'search form__input', id: 'search', type: 'text', style: { color: 'white', marginRight: '8px' }, name: 'search', placeholder: 'What book are you looking for?', required: true,
 	                                onChange: function onChange(event) {
 	                                    _this3.update(event);
 	                                }
 	                            }),
-	                            _react2.default.createElement("input", { className: "submittt", name: "submit", type: "submit", value: "Search",
+	                            _react2.default.createElement('input', { className: 'submittt', name: 'submit', type: 'submit', value: 'Search',
 	                                onClick: function onClick() {
 	                                    return _this3.goSearch();
 	                                }
@@ -28288,83 +28303,89 @@
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    "div",
+	                    'div',
 	                    { style: { textAlign: 'center', marginTop: '110px' } },
 	                    this.state.found.map(function (books) {
 	                        return _react2.default.createElement(
-	                            "div",
+	                            'div',
 	                            null,
 	                            _react2.default.createElement(
-	                                "table",
-	                                { className: "center-x", style: { width: 800, color: 'white', borderColor: '#2c3338', position: 'relative' } },
+	                                'table',
+	                                { className: 'center-x', style: { width: 800, color: 'white', borderColor: '#2c3338', position: 'relative' } },
 	                                _react2.default.createElement(
-	                                    "tbody",
+	                                    'tbody',
 	                                    null,
 	                                    _react2.default.createElement(
-	                                        "tr",
+	                                        'tr',
 	                                        null,
 	                                        _react2.default.createElement(
-	                                            "th",
+	                                            'th',
 	                                            null,
-	                                            " "
+	                                            ' '
 	                                        )
 	                                    ),
 	                                    _react2.default.createElement(
-	                                        "tr",
+	                                        'tr',
 	                                        null,
 	                                        _react2.default.createElement(
-	                                            "td",
-	                                            { style: { width: 150, height: 170 }, rowSpan: "4" },
-	                                            _react2.default.createElement("img", { src: books.picLoc, style: { width: 150, height: 170 } })
+	                                            'td',
+	                                            { style: { width: 150, height: 170 }, rowSpan: '4' },
+	                                            _react2.default.createElement('img', { src: books.picLoc, style: { width: 150, height: 170 } })
 	                                        ),
 	                                        _react2.default.createElement(
-	                                            "td",
+	                                            'td',
 	                                            null,
-	                                            "Title: ",
+	                                            'Title: ',
 	                                            books.title
 	                                        )
 	                                    ),
 	                                    _react2.default.createElement(
-	                                        "tr",
+	                                        'tr',
 	                                        null,
 	                                        _react2.default.createElement(
-	                                            "td",
+	                                            'td',
 	                                            null,
-	                                            " Author: ",
+	                                            ' Author: ',
 	                                            books.author
 	                                        )
 	                                    ),
 	                                    _react2.default.createElement(
-	                                        "tr",
+	                                        'tr',
 	                                        null,
 	                                        _react2.default.createElement(
-	                                            "td",
+	                                            'td',
 	                                            null,
-	                                            " Description: ",
+	                                            ' Description: ',
 	                                            books.description
 	                                        )
 	                                    ),
 	                                    _react2.default.createElement(
-	                                        "tr",
+	                                        'tr',
 	                                        null,
 	                                        _react2.default.createElement(
-	                                            "td",
-	                                            { style: { textAlign: 'center' }, height: "70px" },
-	                                            _react2.default.createElement("input", { className: "submittt", style: { display: 'inline' }, type: "button", name: books.bookLoc, value: "DOWNLOAD" }),
+	                                            'td',
+	                                            { style: { textAlign: 'center' }, height: '70px' },
 	                                            _react2.default.createElement(
-	                                                "p",
+	                                                'a',
+	                                                { className: 'submittt', style: { display: 'inline' }, onClick: function onClick() {
+	                                                        return _this3.addPrev(books.bookid);
+	                                                    }, type: 'button', href: books.bookLoc, download: true },
+	                                                'DOWNLOAD'
+	                                            ),
+	                                            _react2.default.createElement(
+	                                                'p',
 	                                                { style: { display: 'none' } },
-	                                                "Must be signed in to download"
+	                                                'Must be signed in to download'
 	                                            )
 	                                        )
 	                                    )
 	                                )
 	                            ),
-	                            _react2.default.createElement("br", null),
-	                            _react2.default.createElement("br", null),
-	                            _react2.default.createElement("hr", { style: { width: '79%', borderColor: 'rgb(37, 42, 45)' } }),
-	                            _react2.default.createElement("br", null),
-	                            _react2.default.createElement("br", null)
+	                            _react2.default.createElement('br', null),
+	                            _react2.default.createElement('br', null),
+	                            _react2.default.createElement('hr', { style: { width: '79%', borderColor: 'rgb(37, 42, 45)' } }),
+	                            _react2.default.createElement('br', null),
+	                            _react2.default.createElement('br', null)
 	                        );
 	                    })
 	                )
@@ -28659,7 +28680,11 @@
 	                                        _react2.default.createElement(
 	                                            "td",
 	                                            { style: { textAlign: 'center' }, height: "70px" },
-	                                            _react2.default.createElement("input", { className: "submittt", style: { display: 'inline' }, type: "button", name: books.bookLoc, value: "DOWNLOAD" }),
+	                                            _react2.default.createElement(
+	                                                "a",
+	                                                { className: "submittt", style: { display: 'inline' }, type: "button", href: books.bookLoc, download: true },
+	                                                "DOWNLOAD"
+	                                            ),
 	                                            _react2.default.createElement(
 	                                                "p",
 	                                                { style: { display: 'none' } },

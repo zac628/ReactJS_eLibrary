@@ -10,6 +10,7 @@ import { Search } from "./components/Search";
 import { add } from "./components/addBook";
 import { getAll } from "./components/allBooks";
 import { del } from "./components/delBook";
+import { prev } from "./components/previous";
 import { Main } from "./components/main";
 
 
@@ -26,6 +27,7 @@ class App extends React.Component{
                     <Route path="/allbooks" component={getAll}/>
                     <Route path="/addbook" component={add}/>
                     <Route path="/deletebook" component={del}/>
+                    <Route path="/previous" component={prev}/>
                 </div>
             </Router>
         );

@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from 'prop-types';
-
+import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 import { Main } from "./main";
 
 export class Search extends React.Component{
     constructor(){
         super();
+        this.cookie_key4 = 'eLibID';
         this.state={
             toSearch: "",
             height: true,
@@ -33,6 +34,12 @@ export class Search extends React.Component{
         fetch(`http://localhost:1337/find?keyword=${this.state.toSearch}`)
             .then(res => res.json())
             .then(results => this.setState({found:results}, () => console.log("fetched", found)));
+    }
+
+    addPrev(id){
+        const userid = read_cookie(this.cookie_key4);
+        fetch(`http://localhost:1337/prev?id=${id}&user=${userid}`);
+        //alert("Book has been added!");
     }
     render(){
         let inHeight = this.state.height ? "50%" : "110px";
@@ -87,7 +94,7 @@ export class Search extends React.Component{
                             <tr>
                                 <td style={{textAlign:'center'}} height="70px">
 
-                                <input className="submittt" style={{display:'inline'}} type="button" name={books.bookLoc} value="DOWNLOAD" />
+                                    <a className="submittt" style={{display:'inline'}} onClick={()=>this.addPrev(books.bookid)} type="button" href={books.bookLoc} download>DOWNLOAD</a>
 
                                     <p style={{display:'none'}}>Must be signed in to download</p>
                                 </td>

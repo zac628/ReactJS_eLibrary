@@ -26,9 +26,11 @@ export class login extends React.Component {
                 const cookie_key1 = 'eLibUser';
                 const cookie_key2 = 'eLibName';
                 const cookie_key3 = 'eLibLvl';
+                const cookie_key4 = 'eLibID';
                 bake_cookie(cookie_key1, this.state.username);
                 bake_cookie(cookie_key2, this.state.authPass[0]);
                 bake_cookie(cookie_key3, this.state.authPass[1]);
+                bake_cookie(cookie_key4, this.state.authPass[2]);
                 document.location.replace('/home');
             }}));
             //.then(results => {if(this.state.authPass){document.location.replace('/home')}});

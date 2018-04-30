@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 import { Main } from "./main";
 
-export class getAll extends React.Component{
+export class prev extends React.Component{
     constructor(){
         super();
         this.cookie_key4 = 'eLibID';
@@ -13,7 +13,9 @@ export class getAll extends React.Component{
     }
 
     getBooks(){
-        fetch(`http://localhost:1337/all`)
+        const userid = read_cookie(this.cookie_key4);
+        console.log("cookie", userid);
+        fetch(`http://localhost:1337/showPrev?userid=${userid}`)
             .then(res => res.json())
             .then(results => this.setState({found:results}, () => console.log("fetched", this.state.found)));
     }
@@ -86,7 +88,7 @@ export class getAll extends React.Component{
     }
 }
 
-getAll.propTypes ={
+prev.propTypes ={
     name: PropTypes.string,
     age: PropTypes.number,
     user: PropTypes.object

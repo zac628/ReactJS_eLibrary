@@ -25,8 +25,8 @@ class MenuLinks extends React.Component {
         }else{
             return <div>
             <li>
-                <Link to={"/home"}>Your Account</Link></li>
-                <li><Link to={"/home"}>Previous Downloads</Link></li>
+                <Link to={"/home"} style={{display: 'none'}}>Your Account</Link></li>
+                <li><Link to={"/previous"}>Previous Downloads</Link></li>
             </div>;
         }
 

@@ -128,8 +128,9 @@ app.get('/signUp', function(req, res, next){
                                 console.log('success');
                                 const name = results[0].name;
                                 const lvl = results[0].user_lvl;
+                                const id = results[0].userid;
                                 //res.redirect('http://localhost:8080/');
-                                return res.json([name, lvl]);
+                                return res.json([name, lvl, id]);
                                 //next();
 
                             }else{
@@ -142,6 +143,43 @@ app.get('/signUp', function(req, res, next){
         }
     });
 
+});
+
+app.get('/prev',function(req, res){
+   const {id, user} = req.query;
+   ADD_PREV = `INSERT INTO dloads (user,book) VALUES ('${user}','${id}');`;
+    connection.query(ADD_PREV, function(error, results, next){
+
+        if(!!error){
+            console.log(error);
+            res.send('Something went wrong adding book to prev');
+        }else{
+
+            console.log('book added to prev success');
+            res.send('book added to prev success');
+        }
+
+    })
+});
+
+app.get('/showPrev', function(req, res, next) {
+    const { userid } = req.query;
+    const TO_SEARCH = `Select dloads.user, dloads.book, books.bookid, books.title, books.author, books.description, books.bookLoc, books.picLoc FROM dloads LEFT JOIN books ON dloads.book = books.bookid WHERE user = '${userid}';`;
+    connection.query(TO_SEARCH, function(error, results){
+        if(!!error){
+            console.log(error);
+            res.send('Something went wrong');
+        }else{
+            //res.json(results.length);
+            if(results.length > 0) {
+                //book found
+                //res.json(results);
+                return res.json(results);
+            }else{
+                return res.json("no book found");
+            }
+        }
+    });
 });
 
 
@@ -173,6 +211,7 @@ app.get('/auth', function(req, res, next){
             if(results.length >0) {
                 const name = results[0].name;
                 const lvl = results[0].user_lvl;
+                const id = results[0].userid;
                 //user found
                 /*
                 res.cookie('eLibUsername', results[0].username,{path: '/',httpOnly : false});
@@ -182,7 +221,7 @@ app.get('/auth', function(req, res, next){
                 //res.send(results[0].name);
                 console.log('success');
                 //res.redirect('http://localhost:8080/');
-                return res.json([name, lvl]);
+                return res.json([name, lvl, id]);
                 //next();
 
             }else{
